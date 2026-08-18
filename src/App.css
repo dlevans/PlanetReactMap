@@ -1,0 +1,203 @@
+/* --- Global Styles --- */
+* { box-sizing: border-box; }
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f4f4f4;
+    text-align: center;
+    padding: 20px 0 80px 0;
+    margin: 0;
+}
+
+.sidebar {
+    margin: 0 auto;
+    padding: 30px;
+    background: #333;
+    color: white;
+    max-width: 1000px;
+    border-radius: 12px;
+}
+
+.group { margin-bottom: 20px; }
+
+.loading-msg { color: #ccc; font-size: 13px; }
+.loading-msg.error { color: #ff8a80; text-align: left; line-height: 1.5; }
+.loading-msg.error code { background: #222; padding: 1px 5px; border-radius: 3px; }
+
+label {
+    display: inline-block;
+    padding: 8px 15px;
+    margin: 5px;
+    background: #444;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+label input[type="checkbox"] { display: none; }
+
+/* Replaces the old per-id "#check-x:checked ~ .sidebar .label-x" rules --
+   React just toggles this class directly. */
+.group label.active {
+    background: #007bff !important;
+    color: white !important;
+}
+
+.reset-btn {
+    margin-bottom: 25px;
+    padding: 10px 25px;
+    cursor: pointer;
+    background: #c0392b;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+/* --- Map Logic --- */
+.map-container {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    margin: 20px auto 40px auto;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    line-height: 0;
+}
+
+.map-container img { width: 100%; display: block; }
+
+.room-layer {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+}
+
+
+/* --- Zoom + Pan viewer: one shared canvas per gallery --- */
+.zoom-widget { display: block; }
+
+.zoom-viewport {
+    position: relative;
+    overflow: auto;
+    max-height: 70vh;
+    width: 100%;
+    background: #000;
+    cursor: grab;
+    touch-action: none; /* we handle pan/pinch ourselves so the browser doesn't fight us for it */
+}
+.zoom-viewport.dragging { cursor: grabbing; }
+
+.zoom-sizer { position: relative; }
+
+.zoom-canvas {
+    position: absolute;
+    top: 0; left: 0;
+    transform-origin: top left;
+    line-height: 0;
+}
+
+.zoom-controls {
+    display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
+    padding: 8px 4px 0 4px; font-size: 12px; color: #ccc;
+}
+.zoom-controls button {
+    background: #2c2f35; color: #e8e9eb; border: 1px solid #444;
+    width: 22px; height: 22px; border-radius: 4px; cursor: pointer; line-height: 1;
+}
+.zoom-controls button:hover { border-color: #4f9dde; }
+.zoom-controls input[type="range"] { width: 110px; }
+.zoom-controls .zoom-pct { width: 38px; text-align: right; font-variant-numeric: tabular-nums; }
+.zoom-controls .zoom-reset { width: auto; padding: 0 8px; font-size: 11px; }
+.zoom-controls .zoom-hint { color: #777; font-size: 11px; margin-left: 4px; }
+
+/* --- Booth pins (nested inside the scaled canvas, so they zoom/pan
+   with the image automatically -- no separate coordinate math needed) --- */
+.pins-overlay {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+}
+
+.booth-pin {
+    position: absolute;
+    width: 10px; height: 10px;
+    margin: -5px 0 0 -5px;
+    border-radius: 50%;
+    background: #e0a63a;
+    border: 2px solid #1c1e22;
+    pointer-events: auto;
+    cursor: pointer;
+    transition: transform 0.15s ease, background 0.15s ease;
+    z-index: 10;
+}
+.booth-pin:hover { background: #007bff; transform: scale(1.5); z-index: 11; }
+
+.pin-num {
+    position: absolute;
+    top: 130%; left: 50%; transform: translateX(-50%);
+    font-size: 9px; line-height: 1; color: #fff;
+    background: rgba(0,0,0,0.7); padding: 1px 4px; border-radius: 3px;
+    white-space: nowrap; pointer-events: none;
+}
+
+.pin-tag {
+    position: absolute;
+    bottom: 130%; left: 50%; transform: translateX(-50%);
+    background: #0d0f11; color: #e8e9eb; padding: 3px 8px; border-radius: 4px;
+    font-size: 12px; white-space: nowrap; opacity: 0; pointer-events: none;
+    transition: opacity 0.1s ease; border: 1px solid #383c43; z-index: 12;
+}
+.booth-pin:hover .pin-tag { opacity: 1; }
+
+.copyright-layer {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 50;
+    pointer-events: none;
+    opacity: 1;
+}
+
+/* --- Bartle Hall Gallery (Continuous Strip) ---
+   Same technique as the original: fixed-height images, width auto,
+   zero gap -- so consecutive halls stitch together edge-to-edge. --- */
+.top-down-gallery {
+    padding: 20px;
+    border-top: 1px solid #555;
+    background: #000;
+}
+
+.hall-strip {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+}
+
+.hall-image-wrap { position: relative; line-height: 0; }
+.hall-image { height: 400px; width: auto; display: block; }
+
+/* --- Great Hall Puzzle Grid ---
+   Original fixed-column-width technique restored: grid-template-columns
+   sets each piece's width, images fill their cell at width:100% -- so
+   pieces tile into one seamless floor plan again. --- */
+.great-hall-gallery-wrap {
+    padding: 20px;
+    border-top: 1px solid #555;
+    background: #000;
+}
+
+.great-hall-puzzle-grid {
+    display: grid;
+    grid-template-columns: 308px 318px;
+    gap: 0;
+    line-height: 0;
+}
+
+.puzzle-piece { background: #000; }
+.puzzle-image-wrap { position: relative; line-height: 0; }
+.puzzle-image { display: block; width: 100%; height: auto; }
