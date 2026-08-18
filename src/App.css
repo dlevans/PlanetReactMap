@@ -196,6 +196,20 @@ label input[type="checkbox"] { display: none; }
 .puzzle-image-wrap { position: relative; line-height: 0; }
 .puzzle-image { display: block; width: 100%; height: auto; }
 
+/* --- Room 1500 Gallery (Single Column Vertical Layout) --- */
+.room-1500-gallery-wrap {
+    padding: 20px;
+    border-top: 1px solid #555;
+    background: #000;
+}
+
+.room-1500-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    line-height: 0;
+}
+
 /* --- Booth detail panel (fixed, right side) --- */
 .booth-panel {
     position: fixed;

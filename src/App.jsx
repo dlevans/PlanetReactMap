@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import BartleGallery from './BartleGallery.jsx'
 import GreatHallGallery from './GreatHallGallery.jsx'
+import Room1500Gallery from './Room1500Gallery.jsx'
 import BoothPanel from './BoothPanel.jsx'
 import BoothSearch from './BoothSearch.jsx'
 
@@ -119,6 +120,7 @@ export default function App() {
       <div ref={galleryAnchorRef} />
       <BartleGallery checked={checked} rooms={rooms} onSelectBooth={selectBooth} selectedKey={selectedKey} />
       <GreatHallGallery checked={checked} rooms={rooms} onSelectBooth={selectBooth} selectedKey={selectedKey} />
+      <Room1500Gallery checked={checked} rooms={rooms} onSelectBooth={selectBooth} selectedKey={selectedKey} />
 
       <BoothPanel data={selectedBooth} onClose={() => setSelectedBooth(null)} />
     </div>
