@@ -1,13 +1,15 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import BartleGallery from './BartleGallery.jsx'
 import GreatHallGallery from './GreatHallGallery.jsx'
 import BoothPanel from './BoothPanel.jsx'
+import BoothSearch from './BoothSearch.jsx'
 
 export default function App() {
   const [rooms, setRooms] = useState(null)   // booths.json -> data.rooms
   const [checked, setChecked] = useState({}) // roomId -> bool
   const [error, setError] = useState(null)
-  const [selectedBooth, setSelectedBooth] = useState(null) // { booth, roomId, roomLabel } | null
+  const [selectedBooth, setSelectedBooth] = useState(null) // { booth, roomId, roomLabel, scrollTo } | null
+  const galleryAnchorRef = useRef(null)
 
   useEffect(() => {
     fetch('/booths.json')
@@ -19,6 +21,16 @@ export default function App() {
       .catch(err => setError(err.message))
   }, [])
 
+  // Scrolls to the galleries once a search pick actually lands in the DOM
+  // (i.e. after the room's checkbox state has been applied and its gallery
+  // has rendered) -- runs whenever selection changes, but only acts when
+  // that selection was flagged as coming from search.
+  useEffect(() => {
+    if (selectedBooth?.scrollTo) {
+      galleryAnchorRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  }, [selectedBooth])
+
   function toggleRoom(id) {
     setChecked(prev => ({ ...prev, [id]: !prev[id] }))
   }
@@ -28,8 +40,15 @@ export default function App() {
     setSelectedBooth(null)
   }
 
-  function selectBooth(booth, roomId) {
-    setSelectedBooth({ booth, roomId, roomLabel: rooms?.[roomId]?.label || roomId })
+  function selectBooth(booth, roomId, opts = {}) {
+    setSelectedBooth({ booth, roomId, roomLabel: rooms?.[roomId]?.label || roomId, scrollTo: !!opts.scrollTo })
+  }
+
+  // Used by search: turns on the booth's room (in case it wasn't already
+  // checked) and opens its detail panel, then scrolls it into view.
+  function goToBooth(booth, roomId) {
+    setChecked(prev => ({ ...prev, [roomId]: true }))
+    selectBooth(booth, roomId, { scrollTo: true })
   }
 
   const selectedKey = selectedBooth ? selectedBooth.roomId + '::' + selectedBooth.booth.id : null
@@ -52,6 +71,8 @@ export default function App() {
     <div className="sidebar">
       <h2>KC Convention Center Interactive</h2>
       <button type="button" className="reset-btn" onClick={clearMap}>Clear Map</button>
+
+      <BoothSearch rooms={rooms} onGoToBooth={goToBooth} />
 
       {error && (
         <p className="loading-msg error">
@@ -95,6 +116,7 @@ export default function App() {
         <img className="copyright-layer" src="/images/copyright.png" alt="" />
       </div>
 
+      <div ref={galleryAnchorRef} />
       <BartleGallery checked={checked} rooms={rooms} onSelectBooth={selectBooth} selectedKey={selectedKey} />
       <GreatHallGallery checked={checked} rooms={rooms} onSelectBooth={selectBooth} selectedKey={selectedKey} />
 

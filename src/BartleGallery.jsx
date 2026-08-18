@@ -1,4 +1,5 @@
 import ZoomPanViewport from './ZoomPanViewport.jsx'
+import BoothPin from './BoothPin.jsx'
 
 // Order matches the original left-to-right layout (E through A).
 const HALLS = ['hall-e', 'hall-d', 'hall-c', 'hall-b', 'hall-a']
@@ -32,16 +33,14 @@ function HallImage({ id, room, onSelectBooth, selectedKey }) {
       {hasPins && (
         <div className="pins-overlay">
           {booths.map(b => (
-            <div
+            <BoothPin
               key={b.id}
-              className={'booth-pin' + (selectedKey === id + '::' + b.id ? ' selected' : '')}
-              style={{ left: (b.x / imageWidth * 100) + '%', top: (b.y / imageHeight * 100) + '%' }}
-              onMouseDown={e => e.stopPropagation()}
+              booth={b}
+              xPct={b.x / imageWidth * 100}
+              yPct={b.y / imageHeight * 100}
+              selected={selectedKey === id + '::' + b.id}
               onClick={() => onSelectBooth?.(b, id)}
-            >
-              <span className="pin-num">{b.id}</span>
-              <span className="pin-tag">{b.id}{b.label ? ' — ' + b.label : ''}</span>
-            </div>
+            />
           ))}
         </div>
       )}

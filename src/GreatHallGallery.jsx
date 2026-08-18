@@ -1,4 +1,5 @@
 import ZoomPanViewport from './ZoomPanViewport.jsx'
+import BoothPin from './BoothPin.jsx'
 
 // Same 14-cell layout as the original puzzle grid, in DOM order -- the
 // grid is 2 columns wide, so this array naturally flows into the same
@@ -71,16 +72,14 @@ function PuzzleImage({ src, alt, roomId, room, onSelectBooth, selectedKey }) {
       {hasPins && (
         <div className="pins-overlay">
           {booths.map(b => (
-            <div
+            <BoothPin
               key={b.id}
-              className={'booth-pin' + (selectedKey === roomId + '::' + b.id ? ' selected' : '')}
-              style={{ left: (b.x / imageWidth * 100) + '%', top: (b.y / imageHeight * 100) + '%' }}
-              onMouseDown={e => e.stopPropagation()}
+              booth={b}
+              xPct={b.x / imageWidth * 100}
+              yPct={b.y / imageHeight * 100}
+              selected={selectedKey === roomId + '::' + b.id}
               onClick={() => onSelectBooth?.(b, roomId)}
-            >
-              <span className="pin-num">{b.id}</span>
-              <span className="pin-tag">{b.id}{b.label ? ' — ' + b.label : ''}</span>
-            </div>
+            />
           ))}
         </div>
       )}

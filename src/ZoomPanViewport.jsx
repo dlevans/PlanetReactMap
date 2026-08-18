@@ -1,9 +1,14 @@
-import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { createContext, useEffect, useLayoutEffect, useRef, useState } from 'react'
 
 const MIN_ZOOM = 50
 const MAX_ZOOM = 400
 const ZOOM_STEP = 25
-const DOUBLE_CLICK_ZOOM = 200
+const DOUBLE_CLICK_STEP = 100   // how far each double-click zooms in
+
+// Lets anything nested inside the scaled canvas (like booth pins) read the
+// current zoom percentage, so it can counter-scale itself back to a fixed
+// on-screen size instead of ballooning along with the zoomed image.
+export const ZoomContext = createContext(100)
 
 // Wraps arbitrary content (an image strip, a puzzle grid, whatever) in a
 // single shared zoom + pan surface. Content is laid out at its NATURAL
@@ -60,8 +65,7 @@ export default function ZoomPanViewport({ children }) {
     const rect = viewportRef.current.getBoundingClientRect()
     const x = e.clientX - rect.left
     const y = e.clientY - rect.top
-    const target = zoomPct >= DOUBLE_CLICK_ZOOM ? 100 : Math.min(MAX_ZOOM, DOUBLE_CLICK_ZOOM)
-    zoomAt(target, x, y)
+    zoomAt(clamp(zoomPct + DOUBLE_CLICK_STEP), x, y)
   }
 
   // Track the canvas's *unscaled* layout size (offsetWidth/Height ignore
@@ -167,7 +171,9 @@ export default function ZoomPanViewport({ children }) {
             ref={canvasRef}
             style={{ transform: `scale(${zoomPct / 100})` }}
           >
-            {children}
+            <ZoomContext.Provider value={zoomPct}>
+              {children}
+            </ZoomContext.Provider>
           </div>
         </div>
       </div>
