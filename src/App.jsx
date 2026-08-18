@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import BartleGallery from './BartleGallery.jsx'
 import GreatHallGallery from './GreatHallGallery.jsx'
-import Room1500Gallery from './1500gallery.jsx'
+import Room1500Gallery from './Room1500Gallery.jsx'
 import BoothPanel from './BoothPanel.jsx'
 import BoothSearch from './BoothSearch.jsx'
 
@@ -102,8 +102,9 @@ export default function App() {
       <div className="map-container">
         <img src="/images/uncolored.jpg" className="base-map" alt="Base Map" />
 
-        {rooms && Object.entries(rooms).map(([id, room]) => (
-          room.baseImage && (
+        {rooms && Object.entries(rooms).map(([id, room]) => {
+          if (!room.baseImage) return null
+          return (
             <img
               key={id}
               className="room-layer"
@@ -112,7 +113,7 @@ export default function App() {
               alt={room.label || id}
             />
           )
-        ))}
+        })}
 
         <img className="copyright-layer" src="/images/copyright.png" alt="" />
       </div>
@@ -122,7 +123,7 @@ export default function App() {
       <GreatHallGallery checked={checked} rooms={rooms} onSelectBooth={selectBooth} selectedKey={selectedKey} />
       <Room1500Gallery checked={checked} rooms={rooms} onSelectBooth={selectBooth} selectedKey={selectedKey} />
 
-      <BoothPanel data={selectedBooth} onClose={() => setSelectedBooth(null)} />
+      <BoothPanel data={selectedBooth} onClose={() => setSelectedBooth(null)} checked={checked} rooms={rooms} onSelectBooth={selectBooth} />
     </div>
   )
 }

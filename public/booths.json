@@ -832,7 +832,7 @@
           "y": 700,
           "label": "Champion Comics"
         },
-		{
+        {
           "id": "2304",
           "x": 2220,
           "y": 2080,
@@ -944,13 +944,104 @@
       "imageHeight": null,
       "booths": []
     },
-    "rooms-1501": {
-      "label": "1500",
-      "group": "Conference Center & Grand Ballroom",
-      "baseImage": "images/rooms-1501.png",
-      "imageWidth": null,
-      "imageHeight": null,
-      "booths": []
+    "panel-room-1500": {
+    "label": "Panel Room 1500",
+    "group": "Conference Center & Grand Ballroom",
+    "baseImage": "images/rooms-1501.png",
+    "imageWidth": null,
+    "imageHeight": null,
+        "booths": [
+        {
+          "id": "944357",
+          "x": 0,
+          "y": 0,
+          "label": "Anime Kahoot Night :: Panel Room 1500"
+        },
+        {
+          "id": "944358",
+          "x": 0,
+          "y": 0,
+          "label": "Battle of The Vocaloids :: Panel Room 1500"
+        },
+        {
+          "id": "946804",
+          "x": 0,
+          "y": 0,
+          "label": "Planet Anime Karaoke :: Panel Room 1500"
+        },
+        {
+          "id": "946805",
+          "x": 0,
+          "y": 0,
+          "label": "PAKC Cosplay Moon Walk and Furry Parade :: Panel Room 1500"
+        },
+        {
+          "id": "946806",
+          "x": 0,
+          "y": 0,
+          "label": "Friday Night Ani-Rave at PAKC! (16+) :: Panel Room 1500"
+        },
+        {
+          "id": "946810",
+          "x": 0,
+          "y": 0,
+          "label": "Zen Hour :: Panel Room 1500"
+        },
+        {
+          "id": "944366",
+          "x": 0,
+          "y": 0,
+          "label": "Vital Instrument Crafting Contest :: Panel Room 1500"
+        },
+        {
+          "id": "944367",
+          "x": 0,
+          "y": 0,
+          "label": "Riders On The Sea; Sea Shanty Extravaganza (13+) :: Panel Room 1500"
+        },
+        {
+          "id": "946803",
+          "x": 0,
+          "y": 0,
+          "label": "A Demon Slayer Sleepover! :: Panel Room 1500"
+        },
+        {
+          "id": "944369",
+          "x": 0,
+          "y": 0,
+          "label": "J-Pop and Anime Random Play Dance! :: Panel Room 1500"
+        },
+        {
+          "id": "946811",
+          "x": 0,
+          "y": 0,
+          "label": "Planet Anime Karaoke :: Panel Room 1500"
+        },
+        {
+          "id": "946812",
+          "x": 0,
+          "y": 0,
+          "label": "Saturday Night Ani-Rave at PAKC! (16+) :: Panel Room 1500"
+        },
+        {
+          "id": "943486",
+          "x": 0,
+          "y": 0,
+          "label": "KC Idol✧Festival: Colorful Chorus J-Idol Festival :: Panel Room 1500"
+        },
+        {
+          "id": "943487",
+          "x": 0,
+          "y": 0,
+          "label": "KC Idol✧Festival: Intro to Idols (Idol Festivals, Wotagei, and More!) :: Panel Room 1500"
+        },
+        {
+          "id": "943488",
+          "x": 0,
+          "y": 0,
+          "label": "KC Idol✧Festival: J-Pop RDP :: Panel Room 1500"
+        }
+      ]
     },
     "ballroom": {
       "label": "Grand Ballroom (2501)",

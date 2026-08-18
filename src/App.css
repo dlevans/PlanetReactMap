@@ -312,3 +312,26 @@ label input[type="checkbox"] { display: none; }
 .bsr-id { font-weight: 700; color: #e0a63a; flex-shrink: 0; }
 .bsr-label { color: #e8e9eb; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .bsr-room { color: #9aa0a8; font-size: 11px; flex-shrink: 0; }
+
+/* --- Booth Panel List --- */
+.booth-panel-list-header { margin-bottom: 14px; }
+.booth-panel-list-hint { font-size: 12px; color: #9aa0a8; margin: 6px 0 0 0; }
+
+.booth-list { list-style: none; margin: 0; padding: 0; }
+.booth-list-item {
+    display: flex; gap: 10px; align-items: flex-start;
+    padding: 10px; margin-bottom: 6px;
+    background: #2c2f35; border: 1px solid #383c43; border-radius: 6px;
+    cursor: pointer; transition: 0.15s ease;
+}
+.booth-list-item:hover { border-color: #4f9dde; background: #333740; }
+.booth-list-item:active { background: #2c2f35; }
+
+.booth-list-id {
+    font-weight: 700; color: #e0a63a; font-size: 13px; min-width: 45px; text-align: center;
+    padding: 2px 6px; background: rgba(224,166,58,0.15); border-radius: 4px; flex-shrink: 0;
+}
+
+.booth-list-details { flex: 1; min-width: 0; }
+.booth-list-label { font-size: 13px; color: #e8e9eb; font-weight: 500; margin-bottom: 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.booth-list-room { font-size: 11px; color: #9aa0a8; }
