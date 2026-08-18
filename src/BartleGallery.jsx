@@ -3,7 +3,7 @@ import ZoomPanViewport from './ZoomPanViewport.jsx'
 // Order matches the original left-to-right layout (E through A).
 const HALLS = ['hall-e', 'hall-d', 'hall-c', 'hall-b', 'hall-a']
 
-export default function BartleGallery({ checked, rooms }) {
+export default function BartleGallery({ checked, rooms, onSelectBooth, selectedKey }) {
   const anyChecked = HALLS.some(id => checked[id])
   if (!anyChecked) return null
 
@@ -12,7 +12,7 @@ export default function BartleGallery({ checked, rooms }) {
       <ZoomPanViewport>
         <div className="hall-strip">
           {HALLS.map(id => checked[id] && (
-            <HallImage key={id} id={id} room={rooms?.[id]} />
+            <HallImage key={id} id={id} room={rooms?.[id]} onSelectBooth={onSelectBooth} selectedKey={selectedKey} />
           ))}
         </div>
       </ZoomPanViewport>
@@ -20,7 +20,7 @@ export default function BartleGallery({ checked, rooms }) {
   )
 }
 
-function HallImage({ id, room }) {
+function HallImage({ id, room, onSelectBooth, selectedKey }) {
   const booths = room?.booths
   const imageWidth = room?.imageWidth
   const imageHeight = room?.imageHeight
@@ -34,8 +34,10 @@ function HallImage({ id, room }) {
           {booths.map(b => (
             <div
               key={b.id}
-              className="booth-pin"
+              className={'booth-pin' + (selectedKey === id + '::' + b.id ? ' selected' : '')}
               style={{ left: (b.x / imageWidth * 100) + '%', top: (b.y / imageHeight * 100) + '%' }}
+              onMouseDown={e => e.stopPropagation()}
+              onClick={() => onSelectBooth?.(b, id)}
             >
               <span className="pin-num">{b.id}</span>
               <span className="pin-tag">{b.id}{b.label ? ' — ' + b.label : ''}</span>

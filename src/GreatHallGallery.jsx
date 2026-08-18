@@ -25,7 +25,7 @@ const GH_CELLS = [
 
 const GH_IDS = ['gh-a', 'gh-b', 'gh-c', 'gh-d', 'gh-e', 'gh-f', 'gh-g', 'gh-h', 'gh-lobby']
 
-export default function GreatHallGallery({ checked, rooms }) {
+export default function GreatHallGallery({ checked, rooms, onSelectBooth, selectedKey }) {
   const anyChecked = GH_IDS.some(id => checked[id])
   if (!anyChecked) return null
 
@@ -42,7 +42,14 @@ export default function GreatHallGallery({ checked, rooms }) {
                 key={i}
                 style={{ visibility: visible ? 'visible' : 'hidden' }}
               >
-                <PuzzleImage src={`/images/top_down/great_hall/${cell.src}`} alt={cell.id || cell.src} room={room} />
+                <PuzzleImage
+                  src={`/images/top_down/great_hall/${cell.src}`}
+                  alt={cell.id || cell.src}
+                  roomId={cell.id}
+                  room={room}
+                  onSelectBooth={onSelectBooth}
+                  selectedKey={selectedKey}
+                />
               </div>
             )
           })}
@@ -52,7 +59,7 @@ export default function GreatHallGallery({ checked, rooms }) {
   )
 }
 
-function PuzzleImage({ src, alt, room }) {
+function PuzzleImage({ src, alt, roomId, room, onSelectBooth, selectedKey }) {
   const booths = room?.booths
   const imageWidth = room?.imageWidth
   const imageHeight = room?.imageHeight
@@ -66,8 +73,10 @@ function PuzzleImage({ src, alt, room }) {
           {booths.map(b => (
             <div
               key={b.id}
-              className="booth-pin"
+              className={'booth-pin' + (selectedKey === roomId + '::' + b.id ? ' selected' : '')}
               style={{ left: (b.x / imageWidth * 100) + '%', top: (b.y / imageHeight * 100) + '%' }}
+              onMouseDown={e => e.stopPropagation()}
+              onClick={() => onSelectBooth?.(b, roomId)}
             >
               <span className="pin-num">{b.id}</span>
               <span className="pin-tag">{b.id}{b.label ? ' — ' + b.label : ''}</span>

@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react'
 import BartleGallery from './BartleGallery.jsx'
 import GreatHallGallery from './GreatHallGallery.jsx'
+import BoothPanel from './BoothPanel.jsx'
 
 export default function App() {
   const [rooms, setRooms] = useState(null)   // booths.json -> data.rooms
   const [checked, setChecked] = useState({}) // roomId -> bool
   const [error, setError] = useState(null)
+  const [selectedBooth, setSelectedBooth] = useState(null) // { booth, roomId, roomLabel } | null
 
   useEffect(() => {
     fetch('/booths.json')
@@ -23,7 +25,14 @@ export default function App() {
 
   function clearMap() {
     setChecked({})
+    setSelectedBooth(null)
   }
+
+  function selectBooth(booth, roomId) {
+    setSelectedBooth({ booth, roomId, roomLabel: rooms?.[roomId]?.label || roomId })
+  }
+
+  const selectedKey = selectedBooth ? selectedBooth.roomId + '::' + selectedBooth.booth.id : null
 
   // Group rooms by their "group" field, preserving first-seen order.
   const groups = []
@@ -86,8 +95,10 @@ export default function App() {
         <img className="copyright-layer" src="/images/copyright.png" alt="" />
       </div>
 
-      <BartleGallery checked={checked} rooms={rooms} />
-      <GreatHallGallery checked={checked} rooms={rooms} />
+      <BartleGallery checked={checked} rooms={rooms} onSelectBooth={selectBooth} selectedKey={selectedKey} />
+      <GreatHallGallery checked={checked} rooms={rooms} onSelectBooth={selectBooth} selectedKey={selectedKey} />
+
+      <BoothPanel data={selectedBooth} onClose={() => setSelectedBooth(null)} />
     </div>
   )
 }
