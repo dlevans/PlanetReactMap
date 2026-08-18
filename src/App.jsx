@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import BartleGallery from './BartleGallery.jsx'
 import GreatHallGallery from './GreatHallGallery.jsx'
-import Room1500Gallery from './Room1500Gallery.jsx'
+import Room1500Gallery from './1500Gallery.jsx'
 import BoothPanel from './BoothPanel.jsx'
 import BoothSearch from './BoothSearch.jsx'
 
