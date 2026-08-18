@@ -945,7 +945,7 @@
       "booths": []
     },
     "rooms-1501": {
-      "label": "1500 (Staff/Volunteer)",
+      "label": "1500",
       "group": "Conference Center & Grand Ballroom",
       "baseImage": "images/rooms-1501.png",
       "imageWidth": null,
