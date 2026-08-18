@@ -43,7 +43,8 @@
         {
           "id": "2311",
           "x": 1500,
-          "y": 2080
+          "y": 2080,
+          "label": "501st Legion / Star Wars Costuming Groups"
         },
         {
           "id": "2310",
@@ -53,7 +54,8 @@
         {
           "id": "2309",
           "x": 1740,
-          "y": 2080
+          "y": 2080,
+          "label": "Another Castle Creations"
         },
         {
           "id": "2308",
@@ -73,7 +75,8 @@
         {
           "id": "2305",
           "x": 2200,
-          "y": 2080
+          "y": 2080,
+          "label": "Melanie Jasmine"
         },
         {
           "id": "C1",
@@ -88,37 +91,44 @@
         {
           "id": "C10",
           "x": 1660,
-          "y": 1680
+          "y": 1680,
+          "label": "Folxy Cosplay"
         },
         {
           "id": "C11",
           "x": 1720,
-          "y": 1680
+          "y": 1680,
+          "label": "Diana the Great"
         },
         {
           "id": "C12",
           "x": 1800,
-          "y": 1680
+          "y": 1680,
+          "label": "Fancy Jen Cosplay"
         },
         {
           "id": "C13",
           "x": 1880,
-          "y": 1680
+          "y": 1680,
+          "label": "SKS Props"
         },
         {
           "id": "C15",
           "x": 2060,
-          "y": 1680
+          "y": 1680,
+          "label": "Propcustomz"
         },
         {
           "id": "C16",
           "x": 2100,
-          "y": 1680
+          "y": 1680,
+          "label": "Starla Wynn Cosplay"
         },
         {
           "id": "C17",
           "x": 2180,
-          "y": 1680
+          "y": 1680,
+          "label": "Stitchmonkey Cosplay"
         },
         {
           "id": "A10",
@@ -149,7 +159,8 @@
         {
           "id": "A22",
           "x": 1740,
-          "y": 1480
+          "y": 1480,
+          "label": "Hotends Cosplay"
         },
         {
           "id": "A21",
@@ -220,7 +231,7 @@
           "id": "A55",
           "x": 2020,
           "y": 1240,
-          "label": "Wild Bill's"
+          "label": "Wild Bill's Soda"
         },
         {
           "id": "A69",
@@ -249,57 +260,68 @@
         {
           "id": "901",
           "x": 200,
-          "y": 1840
+          "y": 1840,
+          "label": "Collector's Cache"
         },
         {
           "id": "801",
           "x": 320,
-          "y": 1840
+          "y": 1840,
+          "label": "Amazing Imaginarium What's in the Box"
         },
         {
           "id": "701",
           "x": 640,
-          "y": 1840
+          "y": 1840,
+          "label": "Weapon direct"
         },
         {
           "id": "703",
           "x": 640,
-          "y": 1740
+          "y": 1740,
+          "label": "The Legging Lass – Jamie Richter"
         },
         {
           "id": "601",
           "x": 820,
-          "y": 1840
+          "y": 1840,
+          "label": "Toynk Toys"
         },
         {
           "id": "809",
           "x": 320,
-          "y": 1560
+          "y": 1560,
+          "label": "Archangel Games"
         },
         {
           "id": "808",
           "x": 600,
-          "y": 1560
+          "y": 1560,
+          "label": "Laser Monkey Sabers"
         },
         {
           "id": "709",
           "x": 640,
-          "y": 1560
+          "y": 1560,
+          "label": "Ziggy's West"
         },
         {
           "id": "708",
           "x": 820,
-          "y": 1560
+          "y": 1560,
+          "label": "Jay's CD and Hobby"
         },
         {
           "id": "609",
           "x": 900,
-          "y": 1560
+          "y": 1560,
+          "label": "Bubble Wrapp"
         },
         {
           "id": "509",
           "x": 1100,
-          "y": 1560
+          "y": 1560,
+          "label": "Lolita Collective"
         },
         {
           "id": "A75",
@@ -310,37 +332,44 @@
         {
           "id": "813",
           "x": 320,
-          "y": 1440
+          "y": 1440,
+          "label": "Anime Pop"
         },
         {
           "id": "713",
           "x": 640,
-          "y": 1440
+          "y": 1440,
+          "label": "Packrat's Hoard"
         },
         {
           "id": "714",
           "x": 860,
-          "y": 1440
+          "y": 1440,
+          "label": "Dragon Alley"
         },
         {
           "id": "615",
           "x": 900,
-          "y": 1440
+          "y": 1440,
+          "label": "Ubermonk3D"
         },
         {
           "id": "613",
           "x": 900,
-          "y": 1500
+          "y": 1500,
+          "label": "Warez Games"
         },
         {
           "id": "614",
           "x": 1080,
-          "y": 1440
+          "y": 1440,
+          "label": "Patch Man"
         },
         {
           "id": "515",
           "x": 1160,
-          "y": 1440
+          "y": 1440,
+          "label": "Aki Clothing"
         },
         {
           "id": "A75",
@@ -351,313 +380,374 @@
         {
           "id": "521",
           "x": 1180,
-          "y": 1240
+          "y": 1240,
+          "label": "BBZ Customs"
         },
         {
           "id": "621",
           "x": 900,
-          "y": 1240
+          "y": 1240,
+          "label": "MDRN OTAKU"
         },
         {
           "id": "720",
           "x": 820,
-          "y": 1240
+          "y": 1240,
+          "label": "Fandom HD"
         },
         {
           "id": "721",
           "x": 640,
-          "y": 1240
+          "y": 1240,
+          "label": "Utopia Toys and Models"
         },
         {
           "id": "820",
           "x": 600,
-          "y": 1240
+          "y": 1240,
+          "label": "Painted Dragon Studios"
         },
         {
           "id": "821",
           "x": 320,
-          "y": 1240
+          "y": 1240,
+          "label": "triforce cosplay and accessories"
         },
         {
           "id": "825",
           "x": 320,
-          "y": 1200
+          "y": 1200,
+          "label": "Haha Anime and Games"
         },
         {
           "id": "824",
           "x": 600,
-          "y": 1200
+          "y": 1200,
+          "label": "KC Book Beat"
         },
         {
           "id": "725",
           "x": 640,
-          "y": 1200
+          "y": 1200,
+          "label": "Blaze Manga Productions"
         },
         {
           "id": "724",
           "x": 820,
-          "y": 1200
+          "y": 1200,
+          "label": "Atelier in April"
         },
         {
           "id": "625",
           "x": 900,
-          "y": 1200
+          "y": 1200,
+          "label": "Brett Woods Fine Art"
         },
         {
           "id": "525",
           "x": 1180,
-          "y": 1200
+          "y": 1200,
+          "label": "Musetap Studios"
         },
         {
           "id": "622",
           "x": 1100,
-          "y": 1220
+          "y": 1220,
+          "label": "The Witch and The Geek"
         },
         {
           "id": "523",
           "x": 1180,
-          "y": 1220
+          "y": 1220,
+          "label": "Arie Monroe"
         },
         {
           "id": "624",
           "x": 1100,
-          "y": 1200
+          "y": 1200,
+          "label": "Krecic, Leeanne"
         },
         {
           "id": "2245",
           "x": 280,
-          "y": 240
+          "y": 240,
+          "label": "Sen-chan's Art"
         },
         {
           "id": "2244",
           "x": 320,
-          "y": 240
+          "y": 240,
+          "label": "Sen-chan's Art"
         },
         {
           "id": "2243",
           "x": 360,
-          "y": 240
+          "y": 240,
+          "label": "Cosmic Heart Attacks"
         },
         {
           "id": "2242",
           "x": 400,
           "y": 240,
-          "label": "2241"
+          "label": "Cosmic Heart Attacks"
         },
         {
           "id": "2241",
           "x": 440,
-          "y": 240
+          "y": 240,
+          "label": "Fr00ggko"
         },
         {
           "id": "2240",
           "x": 480,
-          "y": 240
+          "y": 240,
+          "label": "SoftGoth"
         },
         {
           "id": "2239",
           "x": 520,
-          "y": 240
+          "y": 240,
+          "label": "Haunted Amusement Park"
         },
         {
           "id": "2238",
           "x": 560,
-          "y": 240
+          "y": 240,
+          "label": "Toughbunnie Productions"
         },
         {
           "id": "2237",
           "x": 600,
-          "y": 240
+          "y": 240,
+          "label": "Batmyths"
         },
         {
           "id": "2236",
           "x": 640,
-          "y": 240
+          "y": 240,
+          "label": "SSSONNY"
         },
         {
           "id": "2235",
           "x": 680,
-          "y": 240
+          "y": 240,
+          "label": "Ashley Morgan Art"
         },
         {
           "id": "2234",
           "x": 720,
-          "y": 240
+          "y": 240,
+          "label": "BluBoiArt"
         },
         {
           "id": "2233",
           "x": 760,
-          "y": 240
+          "y": 240,
+          "label": "Comic Endeavors"
         },
         {
           "id": "2232",
           "x": 800,
-          "y": 240
+          "y": 240,
+          "label": "Comic Endeavors"
         },
         {
           "id": "2231",
           "x": 840,
-          "y": 240
+          "y": 240,
+          "label": "KLAW Studio"
         },
         {
           "id": "2230",
           "x": 880,
-          "y": 240
+          "y": 240,
+          "label": "Laughing Crow, The"
         },
         {
           "id": "938",
           "x": 280,
-          "y": 340
+          "y": 340,
+          "label": "Dragon Feathers Illustration"
         },
         {
           "id": "936",
           "x": 280,
-          "y": 400
+          "y": 400,
+          "label": "Freakijiki"
         },
         {
           "id": "934",
           "x": 280,
-          "y": 500
+          "y": 500,
+          "label": "Jenafrid Art"
         },
         {
           "id": "932",
           "x": 280,
-          "y": 600
+          "y": 600,
+          "label": "Andy Arcana"
         },
         {
           "id": "930",
           "x": 280,
-          "y": 700
+          "y": 700,
+          "label": "Bri Crozier Art"
         },
         {
           "id": "839",
           "x": 320,
-          "y": 340
+          "y": 340,
+          "label": "Art Chica Marcum"
         },
         {
           "id": "837",
           "x": 320,
-          "y": 400
+          "y": 400,
+          "label": "Art Chica Marcum"
         },
         {
           "id": "835",
           "x": 320,
-          "y": 500
+          "y": 500,
+          "label": "Nana Marchae Art"
         },
         {
           "id": "833",
           "x": 320,
-          "y": 600
+          "y": 600,
+          "label": "Crazy Red Artist"
         },
         {
           "id": "831",
           "x": 320,
-          "y": 700
+          "y": 700,
+          "label": "Crazy Red Artist"
         },
         {
           "id": "838",
           "x": 520,
-          "y": 340
+          "y": 340,
+          "label": "Sykopop"
         },
         {
           "id": "836",
           "x": 520,
-          "y": 400
+          "y": 400,
+          "label": "Smolmilkyways"
         },
         {
           "id": "834",
           "x": 520,
-          "y": 500
+          "y": 500,
+          "label": "IsaacRetroArt"
         },
         {
           "id": "832",
           "x": 520,
-          "y": 600
+          "y": 600,
+          "label": "Yimmygee"
         },
         {
           "id": "830",
           "x": 520,
-          "y": 700
+          "y": 700,
+          "label": "Art of David Wong"
         },
         {
           "id": "739",
           "x": 560,
-          "y": 340
+          "y": 340,
+          "label": "Supernova Art Studio"
         },
         {
           "id": "737",
           "x": 560,
-          "y": 400
+          "y": 400,
+          "label": "Speedlag"
         },
         {
           "id": "735",
           "x": 560,
-          "y": 500
+          "y": 500,
+          "label": "Jason Turner Art"
         },
         {
           "id": "733",
           "x": 560,
-          "y": 600
+          "y": 600,
+          "label": "Jason Turner Art"
         },
         {
           "id": "731",
           "x": 560,
-          "y": 700
+          "y": 700,
+          "label": "MallyJanks"
         },
         {
           "id": "738",
           "x": 720,
-          "y": 340
+          "y": 340,
+          "label": "MissGreenKitty"
         },
         {
           "id": "736",
           "x": 720,
-          "y": 400
+          "y": 400,
+          "label": "onemegawatt"
         },
         {
           "id": "734",
           "x": 720,
-          "y": 500
+          "y": 500,
+          "label": "Inksmoker Studio"
         },
         {
           "id": "732",
           "x": 720,
-          "y": 600
+          "y": 600,
+          "label": "Empty Echo"
         },
         {
           "id": "730",
           "x": 720,
-          "y": 700
+          "y": 700,
+          "label": "Phib Studios"
         },
         {
           "id": "639",
           "x": 760,
-          "y": 340
+          "y": 340,
+          "label": "Blacksunflower Studios"
         },
         {
           "id": "637",
           "x": 760,
-          "y": 400
+          "y": 400,
+          "label": "EmbyMarissa"
         },
         {
           "id": "635",
           "x": 760,
-          "y": 500
+          "y": 500,
+          "label": "EmbyMarissa"
         },
         {
           "id": "633",
           "x": 760,
-          "y": 600
+          "y": 600,
+          "label": "RFCreations"
         },
         {
           "id": "631",
           "x": 760,
-          "y": 700
+          "y": 700,
+          "label": "LucidSky"
         },
         {
           "id": "638",
           "x": 880,
-          "y": 340
+          "y": 340,
+          "label": "Soviviii"
         },
         {
           "id": "636",
@@ -667,67 +757,86 @@
         {
           "id": "634",
           "x": 880,
-          "y": 500
+          "y": 500,
+          "label": "Shouaart"
         },
         {
           "id": "632",
           "x": 880,
-          "y": 600
+          "y": 600,
+          "label": "SaBasse Studios"
         },
         {
           "id": "630",
           "x": 880,
-          "y": 700
+          "y": 700,
+          "label": "takosumi"
         },
         {
           "id": "539",
           "x": 920,
-          "y": 340
+          "y": 340,
+          "label": "Painty's Corner"
         },
         {
           "id": "537",
           "x": 920,
-          "y": 400
+          "y": 400,
+          "label": "Olivia Oltmanns Art"
         },
         {
           "id": "535",
           "x": 920,
-          "y": 500
+          "y": 500,
+          "label": "Fenton, Josie"
         },
         {
           "id": "533",
           "x": 920,
-          "y": 600
+          "y": 600,
+          "label": "Caitieboo"
         },
         {
           "id": "531",
           "x": 920,
-          "y": 700
+          "y": 700,
+          "label": "Monkey Minion Press – Dane Ault"
         },
         {
           "id": "538",
           "x": 1040,
-          "y": 340
+          "y": 340,
+          "label": "Magical Mews"
         },
         {
           "id": "536",
           "x": 1040,
-          "y": 400
+          "y": 400,
+          "label": "TangolaDude"
         },
         {
           "id": "534",
           "x": 1040,
-          "y": 500
+          "y": 500,
+          "label": "Tabrakadabra"
         },
         {
           "id": "532",
           "x": 1040,
-          "y": 600
+          "y": 600,
+          "label": "Kluthe, Andy"
         },
         {
           "id": "530",
           "x": 1040,
-          "y": 700
+          "y": 700,
+          "label": "Champion Comics"
+        },
+		{
+          "id": "2304",
+          "x": 2220,
+          "y": 2080,
+          "label": "Sparqy Cosplay"
         }
       ]
     },
