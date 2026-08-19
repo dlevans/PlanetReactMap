@@ -192,6 +192,13 @@ label input[type="checkbox"] { display: none; }
     line-height: 0;
 }
 
+/* --- Grand Ballroom Gallery --- */
+.grand-ballroom-gallery-wrap {
+    padding: 20px;
+    border-top: 1px solid #555;
+    background: #000;
+}
+
 .puzzle-piece { background: #000; }
 .puzzle-image-wrap { position: relative; line-height: 0; }
 .puzzle-image { display: block; width: 100%; height: auto; }

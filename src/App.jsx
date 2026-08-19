@@ -4,6 +4,12 @@ import GreatHallGallery from './GreatHallGallery.jsx'
 import Room1500Gallery from './Room1500Gallery.jsx'
 import BoothPanel from './BoothPanel.jsx'
 import BoothSearch from './BoothSearch.jsx'
+import GrandBallroomGallery from './GrandBallroomGallery.jsx'
+import Rooms2502_2505 from './Rooms2502_2505.jsx'
+import ExhibitionHall from './ExhibitionHall.jsx'
+import Arena from './Arena.jsx'
+import LittleTheater from './LittleTheater.jsx'
+import MusicHall from './MusicHall.jsx'
 
 export default function App() {
   const [rooms, setRooms] = useState(null)   // booths.json -> data.rooms
@@ -122,6 +128,12 @@ export default function App() {
       <BartleGallery checked={checked} rooms={rooms} onSelectBooth={selectBooth} selectedKey={selectedKey} />
       <GreatHallGallery checked={checked} rooms={rooms} onSelectBooth={selectBooth} selectedKey={selectedKey} />
       <Room1500Gallery checked={checked} rooms={rooms} onSelectBooth={selectBooth} selectedKey={selectedKey} />
+      <GrandBallroomGallery checked={checked} rooms={rooms} onSelectBooth={selectBooth} selectedKey={selectedKey} />
+      <Rooms2502_2505 checked={checked} rooms={rooms} onSelectBooth={selectBooth} selectedKey={selectedKey} />
+      <ExhibitionHall checked={checked} rooms={rooms} onSelectBooth={selectBooth} selectedKey={selectedKey} />
+      <Arena checked={checked} rooms={rooms} onSelectBooth={selectBooth} selectedKey={selectedKey} />
+      <LittleTheater checked={checked} rooms={rooms} onSelectBooth={selectBooth} selectedKey={selectedKey} />
+      <MusicHall checked={checked} rooms={rooms} onSelectBooth={selectBooth} selectedKey={selectedKey} />
 
       <BoothPanel data={selectedBooth} onClose={() => setSelectedBooth(null)} checked={checked} rooms={rooms} onSelectBooth={selectBooth} />
     </div>

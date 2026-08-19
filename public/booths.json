@@ -844,9 +844,38 @@
       "label": "Hall E",
       "group": "Bartle Hall",
       "baseImage": "images/bartle_hall/hall-e.png",
-      "imageWidth": null,
-      "imageHeight": null,
-      "booths": []
+      "imageWidth": 2805,
+      "imageHeight": 2384,
+      "booths": [
+        {
+          "id": "booth-1",
+          "label": "",
+          "x": 1108,
+          "y": 1021,
+          "description": ""
+        },
+        {
+          "id": "booth-2",
+          "label": "",
+          "x": 1640,
+          "y": 750,
+          "description": ""
+        },
+        {
+          "id": "booth-3",
+          "label": "",
+          "x": 953,
+          "y": 745,
+          "description": ""
+        },
+        {
+          "id": "booth-4",
+          "label": "",
+          "x": 960,
+          "y": 1487,
+          "description": ""
+        }
+      ]
     },
     "rooms-2101": {
       "label": "Rooms 2101-2105",
@@ -945,12 +974,12 @@
       "booths": []
     },
     "panel-room-1500": {
-    "label": "Panel Room 1500",
-    "group": "Conference Center & Grand Ballroom",
-    "baseImage": "images/rooms-1501.png",
-    "imageWidth": null,
-    "imageHeight": null,
-        "booths": [
+      "label": "Panel Room 1500",
+      "group": "Conference Center & Grand Ballroom",
+      "baseImage": "images/rooms-1501.png",
+      "imageWidth": null,
+      "imageHeight": null,
+      "booths": [
         {
           "id": "944357",
           "x": 0,
