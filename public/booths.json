@@ -846,36 +846,7 @@
       "baseImage": "images/bartle_hall/hall-e.png",
       "imageWidth": 2805,
       "imageHeight": 2384,
-      "booths": [
-        {
-          "id": "booth-1",
-          "label": "",
-          "x": 1108,
-          "y": 1021,
-          "description": ""
-        },
-        {
-          "id": "booth-2",
-          "label": "",
-          "x": 1640,
-          "y": 750,
-          "description": ""
-        },
-        {
-          "id": "booth-3",
-          "label": "",
-          "x": 953,
-          "y": 745,
-          "description": ""
-        },
-        {
-          "id": "booth-4",
-          "label": "",
-          "x": 960,
-          "y": 1487,
-          "description": ""
-        }
-      ]
+      "booths": [      ]
     },
     "rooms-2101": {
       "label": "Rooms 2101-2105",
