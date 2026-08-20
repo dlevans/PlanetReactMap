@@ -105,66 +105,74 @@ export default function App() {
 
   return (
     <div className="sidebar">
-      <h2>KC Convention Center Interactive</h2>
-      <button type="button" className="reset-btn" onClick={clearMap}>Clear Map</button>
+      <div className="sidebar-main">
+        <h2>KC Convention Center Interactive</h2>
+        <button type="button" className="reset-btn" onClick={clearMap}>Clear Map</button>
 
-      <BoothSearch rooms={rooms} onGoToBooth={goToBooth} />
+        <BoothSearch rooms={rooms} onGoToBooth={goToBooth} />
 
-      {error && (
-        <p className="loading-msg error">
-          Couldn't load booths.json ({error}). Make sure booths.json is in the <code>public/</code> folder
-          and the dev server is running (<code>npm run dev</code>).
-        </p>
-      )}
-      {!rooms && !error && <p className="loading-msg">Loading rooms…</p>}
+        {error && (
+          <p className="loading-msg error">
+            Couldn't load booths.json ({error}). Make sure booths.json is in the <code>public/</code> folder
+            and the dev server is running (<code>npm run dev</code>).
+          </p>
+        )}
+        {!rooms && !error && <p className="loading-msg">Loading rooms…</p>}
 
-      {groups.map(group => (
-        <div className="group" key={group.name}>
-          <p><strong>{group.name}</strong></p>
-          {group.rooms.map(([id, room]) => (
-            <label key={id} className={checked[id] ? 'active' : ''}>
-              <input
-                type="checkbox"
-                checked={!!checked[id]}
-                onChange={() => toggleRoom(id)}
-              />
-              {room.label}
-            </label>
-          ))}
-        </div>
-      ))}
-
-      <div className="map-container">
-        <img src="/images/uncolored.jpg" className="base-map" alt="Base Map" />
-
-        {rooms && Object.entries(rooms).map(([id, room]) => {
-          if (!room.baseImage) return null
-          return (
-            <img
-              key={id}
-              className="room-layer"
-              style={{ opacity: checked[id] ? 1 : 0 }}
-              src={'/' + room.baseImage}
-              alt={room.label || id}
-            />
-          )
-        })}
-
-        <img className="copyright-layer" src="/images/copyright.png" alt="" />
+        {groups.map(group => (
+          <div className="group" key={group.name}>
+            <p><strong>{group.name}</strong></p>
+            {group.rooms.map(([id, room]) => (
+              <label key={id} className={checked[id] ? 'active' : ''}>
+                <input
+                  type="checkbox"
+                  checked={!!checked[id]}
+                  onChange={() => toggleRoom(id)}
+                />
+                {room.label}
+              </label>
+            ))}
+          </div>
+        ))}
       </div>
 
-      <div ref={galleryAnchorRef} />
-      <BartleGallery checked={checked} rooms={rooms} onSelectBooth={selectBooth} selectedKey={selectedKey} />
-      <GreatHallGallery checked={checked} rooms={rooms} onSelectBooth={selectBooth} selectedKey={selectedKey} />
-      <Room1500Gallery checked={checked} rooms={rooms} onSelectBooth={selectBooth} selectedKey={selectedKey} />
-      <GrandBallroomGallery checked={checked} rooms={rooms} onSelectBooth={selectBooth} selectedKey={selectedKey} />
-      <Rooms2502_2505 checked={checked} rooms={rooms} onSelectBooth={selectBooth} selectedKey={selectedKey} />
-      <ExhibitionHall checked={checked} rooms={rooms} onSelectBooth={selectBooth} selectedKey={selectedKey} />
-      <Arena checked={checked} rooms={rooms} onSelectBooth={selectBooth} selectedKey={selectedKey} />
-      <LittleTheater checked={checked} rooms={rooms} onSelectBooth={selectBooth} selectedKey={selectedKey} />
-      <MusicHall checked={checked} rooms={rooms} onSelectBooth={selectBooth} selectedKey={selectedKey} />
+      <div className="sidebar-inner">
+        <div className="sidebar-main">
+          <div className="map-container">
+            <img src="/images/uncolored.jpg" className="base-map" alt="Base Map" />
 
-      <BoothPanel data={selectedBooth} onClose={() => setSelectedBooth(null)} checked={checked} rooms={rooms} onSelectBooth={selectBooth} />
+            {rooms && Object.entries(rooms).map(([id, room]) => {
+              if (!room.baseImage) return null
+              return (
+                <img
+                  key={id}
+                  className="room-layer"
+                  style={{ opacity: checked[id] ? 1 : 0 }}
+                  src={'/' + room.baseImage}
+                  alt={room.label || id}
+                />
+              )
+            })}
+
+            <img className="copyright-layer" src="/images/copyright.png" alt="" />
+          </div>
+
+          <div ref={galleryAnchorRef} />
+          <BartleGallery checked={checked} rooms={rooms} onSelectBooth={selectBooth} selectedKey={selectedKey} />
+          <GreatHallGallery checked={checked} rooms={rooms} onSelectBooth={selectBooth} selectedKey={selectedKey} />
+          <Room1500Gallery checked={checked} rooms={rooms} onSelectBooth={selectBooth} selectedKey={selectedKey} />
+          <GrandBallroomGallery checked={checked} rooms={rooms} onSelectBooth={selectBooth} selectedKey={selectedKey} />
+          <Rooms2502_2505 checked={checked} rooms={rooms} onSelectBooth={selectBooth} selectedKey={selectedKey} />
+          <ExhibitionHall checked={checked} rooms={rooms} onSelectBooth={selectBooth} selectedKey={selectedKey} />
+          <Arena checked={checked} rooms={rooms} onSelectBooth={selectBooth} selectedKey={selectedKey} />
+          <LittleTheater checked={checked} rooms={rooms} onSelectBooth={selectBooth} selectedKey={selectedKey} />
+          <MusicHall checked={checked} rooms={rooms} onSelectBooth={selectBooth} selectedKey={selectedKey} />
+        </div>
+
+        {selectedBooth && (
+          <BoothPanel data={selectedBooth} onClose={() => setSelectedBooth(null)} checked={checked} rooms={rooms} onSelectBooth={selectBooth} />
+        )}
+      </div>
     </div>
   )
 }

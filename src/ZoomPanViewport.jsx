@@ -45,6 +45,40 @@ export default function ZoomPanViewport({ children }) {
     }
   }, [zoomPct])
 
+  // Set up non-passive wheel and touch listeners once on mount
+  // (React's synthetic events default to passive for perf, but we need to prevent defaults)
+  useEffect(() => {
+    const vp = viewportRef.current
+    if (!vp) return
+
+    function onWheelEvent(e) {
+      if (!e.ctrlKey && !e.metaKey) return
+      e.preventDefault()
+      setZoomPct(z => clamp(z - Math.sign(e.deltaY) * ZOOM_STEP))
+    }
+
+    function onTouchMoveEvent(e) {
+      if (e.touches.length === 2 && pinchState.current) {
+        e.preventDefault()
+        const ratio = touchDist(e.touches) / pinchState.current.dist
+        setZoomPct(clamp(pinchState.current.zoom * ratio))
+      } else if (e.touches.length === 1 && dragState.current) {
+        e.preventDefault()
+        const t = e.touches[0]
+        const vp = viewportRef.current
+        vp.scrollLeft = dragState.current.left - (t.clientX - dragState.current.x)
+        vp.scrollTop = dragState.current.top - (t.clientY - dragState.current.y)
+      }
+    }
+
+    vp.addEventListener('wheel', onWheelEvent, { passive: false })
+    vp.addEventListener('touchmove', onTouchMoveEvent, { passive: false })
+    return () => {
+      vp.removeEventListener('wheel', onWheelEvent)
+      vp.removeEventListener('touchmove', onTouchMoveEvent)
+    }
+  }, [])
+
   // Zooms to newZoom while keeping the content under (viewportX, viewportY)
   // -- coordinates relative to the viewport's own box -- stationary on screen.
   function zoomAt(newZoom, viewportX, viewportY) {
@@ -109,12 +143,7 @@ export default function ZoomPanViewport({ children }) {
     window.removeEventListener('mouseup', onMouseUp)
   }
 
-  // --- Ctrl/Cmd + scroll wheel to zoom (plain scroll still pans normally) ---
-  function onWheel(e) {
-    if (!e.ctrlKey && !e.metaKey) return
-    e.preventDefault()
-    setZoomPct(z => clamp(z - Math.sign(e.deltaY) * ZOOM_STEP))
-  }
+
 
   // --- Touch: one finger pans, two fingers pinch-zoom ---
   function touchDist(touches) {
@@ -132,19 +161,6 @@ export default function ZoomPanViewport({ children }) {
       pinchState.current = null
     }
   }
-  function onTouchMove(e) {
-    const vp = viewportRef.current
-    if (e.touches.length === 2 && pinchState.current) {
-      e.preventDefault()
-      const ratio = touchDist(e.touches) / pinchState.current.dist
-      setZoomPct(clamp(pinchState.current.zoom * ratio))
-    } else if (e.touches.length === 1 && dragState.current) {
-      e.preventDefault()
-      const t = e.touches[0]
-      vp.scrollLeft = dragState.current.left - (t.clientX - dragState.current.x)
-      vp.scrollTop = dragState.current.top - (t.clientY - dragState.current.y)
-    }
-  }
   function onTouchEnd(e) {
     if (e.touches.length < 2) pinchState.current = null
     if (e.touches.length < 1) dragState.current = null
@@ -160,9 +176,7 @@ export default function ZoomPanViewport({ children }) {
         ref={viewportRef}
         onMouseDown={onMouseDown}
         onDoubleClick={onDoubleClick}
-        onWheel={onWheel}
         onTouchStart={onTouchStart}
-        onTouchMove={onTouchMove}
         onTouchEnd={onTouchEnd}
       >
         <div className="zoom-sizer" style={{ width: scaledW || undefined, height: scaledH || undefined }}>
