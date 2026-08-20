@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Booth Editor</title>
+<style>
+  :root{
+    --bg: #1c1e22; --panel: #24272c; --panel-2: #2c2f35; --line: #383c43;
+    --text: #e8e9eb; --muted: #9aa0a8; --accent: #4f9dde; --accent-2: #e0a63a;
+    --danger: #d9534f;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; margin: 0; background: var(--bg); color: var(--text); }
+  .app { display: flex; flex-direction: column; height: 100vh; }
+
+  header {
+    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+    padding: 10px 16px; background: var(--panel); border-bottom: 1px solid var(--line);
+  }
+  header h1 { font-size: 15px; font-weight: 600; margin: 0 8px 0 0; }
+  .field { display: flex; align-items: center; gap: 6px; }
+  label.small { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+  input[type="text"], input[type="number"], select {
+    background: var(--panel-2); border: 1px solid var(--line); color: var(--text);
+    padding: 6px 9px; border-radius: 5px; font-size: 13px;
+  }
+  select#roomSelect { min-width: 200px; }
+  #baseImagePath { width: 220px; }
+  button, .file-btn {
+    background: var(--panel-2); color: var(--text); border: 1px solid var(--line);
+    padding: 7px 12px; border-radius: 5px; font-size: 13px; cursor: pointer;
+  }
+  button:hover, .file-btn:hover { border-color: var(--accent); }
+  button.primary { background: var(--accent); border-color: var(--accent); color: #0b1a24; font-weight: 700; }
+  button:disabled { opacity: 0.35; cursor: not-allowed; }
+  button:disabled:hover { border-color: var(--line); }
+  .file-btn { position: relative; overflow: hidden; }
+  .file-btn input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+  .spacer { flex: 1; }
+  .status { font-size: 12px; color: var(--muted); }
+  .pill { font-size: 11px; padding: 2px 7px; border-radius: 10px; background: var(--panel-2); border: 1px solid var(--line); color: var(--muted); }
+  .pill.on { color: #7fd88a; border-color: #2e5a35; }
+  .icon-btn { width: 30px; padding: 7px 0; text-align: center; }
+
+  main { flex: 1; display: flex; min-height: 0; }
+
+  .canvas-wrap {
+    flex: 1; overflow: auto; position: relative;
+    background:
+      linear-gradient(45deg, #26292e 25%, transparent 25%), linear-gradient(-45deg, #26292e 25%, transparent 25%),
+      linear-gradient(45deg, transparent 75%, #26292e 75%), linear-gradient(-45deg, transparent 75%, #26292e 75%);
+    background-size: 20px 20px; background-position: 0 0, 0 10px, 10px -10px, -10px 0px; background-color: #1a1c1f;
+  }
+  .canvas-wrap.empty { display: flex; align-items: center; justify-content: center; }
+  .empty-hint { color: var(--muted); font-size: 14px; text-align: center; max-width: 380px; line-height: 1.6; }
+  .empty-hint b { color: var(--text); }
+
+  #imgStage { position: relative; display: inline-block; cursor: crosshair; }
+  #baseImg { display: block; user-select: none; -webkit-user-drag: none; }
+
+  /* Booth markers are plain DOM elements positioned over the image --
+     nothing here ever touches the image's actual pixels. */
+  .pin {
+    position: absolute; width: 14px; height: 14px; margin: -7px 0 0 -7px;
+    border-radius: 50%; background: var(--accent-2); border: 2px solid #1c1e22;
+    cursor: grab; z-index: 5;
+  }
+  .pin:hover, .pin.selected { background: var(--accent); transform: scale(1.25); z-index: 6; }
+  .pin.selected { background: #ff5c5c; box-shadow: 0 0 0 3px rgba(255,92,92,0.35); }
+  .pin .num {
+    position: absolute; top: 130%; left: 50%; transform: translateX(-50%);
+    font-size: 9px; color: #fff; background: rgba(0,0,0,0.65); padding: 1px 4px; border-radius: 3px;
+    white-space: nowrap; pointer-events: none;
+  }
+  .pin .tag {
+    position: absolute; bottom: 130%; left: 50%; transform: translateX(-50%);
+    background: #0d0f11; color: var(--text); padding: 2px 6px; border-radius: 4px;
+    font-size: 11px; white-space: nowrap; opacity: 0; pointer-events: none;
+    transition: opacity 0.1s ease; border: 1px solid var(--line);
+  }
+  .pin:hover .tag, .pin.selected .tag { opacity: 1; }
+
+  .marquee-box {
+    position: fixed; display: none;
+    border: 1px dashed var(--accent); background: rgba(79,157,222,0.15);
+    z-index: 999; pointer-events: none;
+  }
+
+  #gridOverlay {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none; z-index: 2;
+  }
+
+  .ctx-menu {
+    position: fixed; display: none;
+    background: var(--panel-2); border: 1px solid var(--line); border-radius: 6px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.5); z-index: 1000; overflow: hidden; min-width: 170px;
+  }
+  .ctx-item { padding: 9px 14px; font-size: 13px; cursor: pointer; white-space: nowrap; }
+  .ctx-item:hover { background: var(--accent); color: #0b1a24; }
+
+  aside.sidebar { width: 300px; flex-shrink: 0; background: var(--panel); border-left: 1px solid var(--line); display: flex; flex-direction: column; overflow-y: auto; }
+  .side-section { padding: 14px; border-bottom: 1px solid var(--line); flex-shrink: 0; }
+  .side-section h2 { font-size: 11px; text-transform: uppercase; letter-spacing: 0.07em; color: var(--muted); margin: 0 0 10px 0; font-weight: 600; }
+  .side-section .hint { font-size: 12px; color: var(--muted); margin-top: 8px; line-height: 1.5; }
+
+  .place-row { display: flex; gap: 6px; }
+  .place-row input { flex: 1; min-width: 0; }
+  #nextId, #nextLabel {
+    width: 100%; background: var(--panel-2); border: 1px solid var(--line); color: var(--text);
+    padding: 9px 10px; border-radius: 5px; font-size: 13px; margin-bottom: 6px;
+  }
+  #nextId:focus, #nextLabel:focus { outline: none; border-color: var(--accent); }
+
+  .zoom-row { display: flex; align-items: center; gap: 8px; }
+  .zoom-row input[type="range"] { flex: 1; }
+  .zoom-row span { font-size: 12px; color: var(--muted); width: 40px; text-align: right; }
+
+  #descInput {
+    width: 100%; background: var(--panel-2); border: 1px solid var(--line); color: var(--text);
+    padding: 8px 9px; border-radius: 5px; font-size: 12px; font-family: inherit; resize: vertical; min-height: 70px;
+  }
+  #descInput:focus { outline: none; border-color: var(--accent); }
+
+  .social-row { display: flex; gap: 4px; margin-bottom: 6px; }
+  .social-row input {
+    background: var(--panel-2); border: 1px solid var(--line); color: var(--text);
+    padding: 6px 8px; border-radius: 4px; font-size: 11px; min-width: 0;
+  }
+  .social-row input:first-child { flex: 0 0 35%; }
+  .social-row input:nth-child(2) { flex: 1; }
+  .social-row .del { flex: 0 0 auto; }
+
+  .add-social-btn { width: 100%; margin-top: 2px; font-size: 12px; }
+
+  /* Selection tools */
+  .grid-row { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; flex-wrap: wrap; }
+  .grid-row input[type="number"] { width: 60px; }
+  .grid-row label { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--muted); cursor: pointer; }
+  .grid-row input[type="range"] { width: 80px; }
+  .btn-row { display: flex; gap: 6px; flex-wrap: wrap; }
+  .btn-row button { flex: 1 1 auto; font-size: 12px; white-space: nowrap; }
+  #deleteSelectedBtn { border-color: #6b2c2a; color: #ff8a80; }
+  #deleteSelectedBtn:hover { border-color: var(--danger); }
+  .selection-count { font-size: 12px; color: var(--accent-2); margin-top: 8px; }
+
+  .list-wrap { flex: 1; display: flex; flex-direction: column; min-height: 240px; padding: 14px; }
+  #search { width: 100%; background: var(--panel-2); border: 1px solid var(--line); color: var(--text); padding: 7px 9px; border-radius: 5px; font-size: 12px; margin-bottom: 10px; }
+  #boothList { list-style: none; margin: 0; padding: 0; overflow-y: auto; flex: 1; }
+  #boothList li { padding: 6px 4px; border-bottom: 1px solid var(--line); font-size: 12px; }
+  #boothList li.selected { background: rgba(79,157,222,0.12); }
+  #boothList .row1 { display: flex; align-items: center; gap: 6px; }
+  #boothList input.id-input, #boothList input.label-input {
+    flex: 1; min-width: 0; background: transparent; border: none; color: var(--text); font-size: 12px; padding: 3px 4px; border-radius: 3px;
+  }
+  #boothList input.id-input { max-width: 70px; font-weight: 700; color: var(--accent-2); }
+  #boothList input.id-input:focus, #boothList input.label-input:focus { outline: 1px solid var(--accent); background: var(--panel-2); }
+  #boothList .coords { color: var(--muted); font-variant-numeric: tabular-nums; font-size: 10px; padding-left: 4px; }
+  #boothList .del { background: none; border: none; color: var(--muted); cursor: pointer; padding: 2px 5px; font-size: 14px; }
+  #boothList .del:hover { color: var(--danger); }
+
+  #count { color: var(--accent-2); font-weight: 700; }
+
+  .rooms-list { margin-top: 8px; font-size: 12px; }
+  .room-tag { display: inline-block; background: var(--panel-2); border: 1px solid var(--line); padding: 4px 8px; border-radius: 4px; margin-right: 6px; margin-bottom: 4px; }
+  .room-tag .del-room { background: none; border: none; color: var(--muted); cursor: pointer; padding: 0 4px; font-size: 12px; margin-left: 4px; }
+  .room-tag .del-room:hover { color: var(--danger); }
+</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <h1>Booth Editor</h1>
+
+    <span class="file-btn">Load Rooms<input type="file" id="loadJson" accept="application/json" multiple></span>
+    <span class="file-btn">Add Pins<input type="file" id="loadPins" accept="application/json" multiple></span>
+
+    <div class="field">
+      <label class="small" for="roomSelect">Room</label>
+      <select id="roomSelect" disabled><option>Load rooms first…</option></select>
+    </div>
+
+    <div class="field">
+      <label class="small" for="baseImagePath">Image path</label>
+      <input type="text" id="baseImagePath" placeholder="path/to/image.png">
+    </div>
+
+    <div class="spacer"></div>
+
+    <button id="exportBtn" class="primary">Export</button>
+    <div class="status" id="status"></div>
+  </header>
+
+  <main>
+    <div class="canvas-wrap empty" id="canvasWrap">
+      <div class="empty-hint">
+        Load or create a room to get started.<br><b>Load Rooms</b> to import booths.json files, then select a room. Click the canvas to place pins.
+      </div>
+    </div>
+
+    <canvas id="gridOverlay"></canvas>
+    <div class="marquee-box" id="marqueeBox"></div>
+
+    <aside class="sidebar">
+
+      <!-- LOAD DATA SECTION -->
+      <div class="side-section">
+        <h2>Loaded Rooms</h2>
+        <div class="rooms-list" id="roomsList"></div>
+        <div class="hint">Click "Load Rooms" to add more, or "Add Pins" to merge pins into the active room.</div>
+      </div>
+
+      <!-- PLACEMENT SECTION -->
+      <div class="side-section">
+        <h2>New Booth</h2>
+        <input type="text" id="nextId" placeholder="ID">
+        <input type="text" id="nextLabel" placeholder="Label (optional)">
+        <div class="hint">Click on image to place, or press Enter to place at center.</div>
+      </div>
+
+      <!-- ZOOM SECTION -->
+      <div class="side-section">
+        <div class="zoom-row">
+          <label class="small" for="zoomSlider" style="flex: 0;">Zoom</label>
+          <input type="range" id="zoomSlider" min="0.25" max="3" step="0.05" value="1">
+          <span id="zoomDisplay">100%</span>
+        </div>
+      </div>
+
+      <!-- GRID/SELECT SECTION -->
+      <div class="side-section">
+        <h2>Select / Grid</h2>
+        <div class="grid-row">
+          <label><input type="checkbox" id="gridToggle"> Grid</label>
+          <input type="number" id="gridSize" min="4" max="256" value="50">
+        </div>
+        <div class="btn-row">
+          <button id="selectAllBtn">Select All</button>
+          <button id="selectNoneBtn">None</button>
+        </div>
+        <div class="grid-row">
+          <label><input type="checkbox" id="snapToggle"> Snap to Grid</label>
+        </div>
+        <div class="grid-row">
+          <button id="alignGridBtn" style="flex: 1;">Align to Grid</button>
+          <button id="copySelectedBtn" class="icon-btn" title="Copy Selected">⎘</button>
+        </div>
+        <button id="deleteSelectedBtn" style="width: 100%; margin-top: 8px;">Delete Selected</button>
+        <div class="selection-count" id="selectionCount"></div>
+      </div>
+
+      <!-- DETAILS SECTION -->
+      <div class="side-section">
+        <h2>Details</h2>
+        <div id="detailsEmpty" style="font-size: 12px; color: var(--muted); line-height: 1.5;">
+          Select a booth to add a description and social links.
+        </div>
+        <div id="detailsForm" style="display: none;">
+          <textarea id="descInput" placeholder="Description…"></textarea>
+          <div style="margin-top: 8px;">
+            <button class="add-social-btn" id="addSocialBtn">+ Add Link</button>
+            <div id="socialsList"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- LIST SECTION -->
+      <div class="list-wrap">
+        <h2 style="margin: 0 0 8px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.07em; color: var(--muted); font-weight: 600;">Booths (<span id="count">0</span>)</h2>
+        <input type="text" id="search" placeholder="Search booths…">
+        <ul id="boothList"></ul>
+      </div>
+    </aside>
+  </main>
+</div>
+
+<script>
+(() => {
+
+  const canvasWrap = document.getElementById('canvasWrap');
+  const imgStageWrap = document.createElement('div'); imgStageWrap.id = 'imgStage';
+  const baseImg = document.createElement('img'); baseImg.id = 'baseImg';
+  imgStageWrap.appendChild(baseImg);
+
+  const loadJsonInput = document.getElementById('loadJson');
+  const loadPinsInput = document.getElementById('loadPins');
+  const roomSelect = document.getElementById('roomSelect');
+  const baseImagePathInput = document.getElementById('baseImagePath');
+  const exportBtn = document.getElementById('exportBtn');
+  const gridOverlay = document.getElementById('gridOverlay');
+  const marqueeBox = document.getElementById('marqueeBox');
+
+  const nextIdInput = document.getElementById('nextId');
+  const nextLabelInput = document.getElementById('nextLabel');
+  const zoomSlider = document.getElementById('zoomSlider');
+  const zoomDisplay = document.getElementById('zoomDisplay');
+  const gridToggle = document.getElementById('gridToggle');
+  const gridSizeInput = document.getElementById('gridSize');
+  const snapToggle = document.getElementById('snapToggle');
+  const alignGridBtn = document.getElementById('alignGridBtn');
+  const copySelectedBtn = document.getElementById('copySelectedBtn');
+  const deleteSelectedBtn = document.getElementById('deleteSelectedBtn');
+  const selectAllBtn = document.getElementById('selectAllBtn');
+  const selectNoneBtn = document.getElementById('selectNoneBtn');
+  const selectionCountEl = document.getElementById('selectionCount');
+
+  const detailsEmpty = document.getElementById('detailsEmpty');
+  const detailsForm = document.getElementById('detailsForm');
+  const descInput = document.getElementById('descInput');
+  const addSocialBtn = document.getElementById('addSocialBtn');
+  const socialsList = document.getElementById('socialsList');
+
+  const searchEl = document.getElementById('search');
+  const boothList = document.getElementById('boothList');
+  const countEl = document.getElementById('count');
+  const statusEl = document.getElementById('status');
+  const roomsListEl = document.getElementById('roomsList');
+
+  let state = {
+    fullData: null,
+    booths: [],
+    selected: new Set(),
+    naturalW: 0, naturalH: 0,
+    zoom: 1, gridOn: false, snapGrid: false, gridSize: 50,
+    clipboard: null,
+    history: []
+  };
+
+  const setStatus = (s) => statusEl.textContent = s;
+  const activeRoomId = () => roomSelect.value;
+
+  // ---------- Load JSON ----------
+  loadJsonInput.addEventListener('change', function(e){
+    const files = Array.from(e.target.files);
+    files.forEach(file => {
+      const reader = new FileReader();
+      reader.onload = function(evt){
+        try {
+          const data = JSON.parse(evt.target.result);
+          mergeRooms(data);
+          renderRoomsList();
+          updateRoomSelect();
+          setStatus('Loaded ' + (data.rooms ? Object.keys(data.rooms).length : 1) + ' room(s)');
+        } catch(err) {
+          alert('Error parsing ' + file.name + ': ' + err.message);
+        }
+      };
+      reader.readAsText(file);
+    });
+    e.target.value = '';
+  });
+
+  loadPinsInput.addEventListener('change', function(e){
+    const roomId = activeRoomId();
+    if (!roomId) { alert('Select a room first'); e.target.value = ''; return; }
+    const files = Array.from(e.target.files);
+    let totalAdded = 0;
+    files.forEach(file => {
+      const reader = new FileReader();
+      reader.onload = function(evt){
+        try {
+          const data = JSON.parse(evt.target.result);
+          const boothsToAdd = Array.isArray(data) ? data : (data.booths || []);
+          if (state.fullData && state.fullData.rooms && state.fullData.rooms[roomId]) {
+            if (!state.fullData.rooms[roomId].booths) state.fullData.rooms[roomId].booths = [];
+            boothsToAdd.forEach(b => {
+              state.fullData.rooms[roomId].booths.push(JSON.parse(JSON.stringify(b)));
+              totalAdded++;
+            });
+            loadRoom(roomId);
+            refreshAll();
+          }
+        } catch(err) {
+          alert('Error parsing ' + file.name + ': ' + err.message);
+        }
+      };
+      reader.readAsText(file);
+    });
+    e.target.value = '';
+    setStatus('Added ' + totalAdded + ' pin(s) to ' + roomId);
+  });
+
+  function mergeRooms(data){
+    if (!state.fullData) {
+      state.fullData = { rooms: {} };
+    }
+    if (data.rooms) {
+      Object.assign(state.fullData.rooms, data.rooms);
+    } else if (data.booths || data.id) {
+      // Single room export format
+      const rid = data.roomId || data.id || 'room-' + Date.now();
+      state.fullData.rooms[rid] = {
+        baseImage: data.baseImage || '',
+        imageWidth: data.imageWidth,
+        imageHeight: data.imageHeight,
+        booths: data.booths || []
+      };
+    }
+  }
+
+  function renderRoomsList(){
+    roomsListEl.innerHTML = '';
+    if (!state.fullData || !state.fullData.rooms) return;
+    Object.keys(state.fullData.rooms).forEach(rid => {
+      const tag = document.createElement('div');
+      tag.className = 'room-tag';
+      tag.textContent = rid + ' (' + (state.fullData.rooms[rid].booths ? state.fullData.rooms[rid].booths.length : 0) + ')';
+      const delBtn = document.createElement('button');
+      delBtn.className = 'del-room';
+      delBtn.textContent = '×';
+      delBtn.addEventListener('click', function(){
+        if (confirm('Delete room ' + rid + '?')) {
+          delete state.fullData.rooms[rid];
+          if (activeRoomId() === rid) {
+            roomSelect.value = Object.keys(state.fullData.rooms)[0] || '';
+            refreshAll();
+          }
+          renderRoomsList();
+          updateRoomSelect();
+        }
+      });
+      tag.appendChild(delBtn);
+      roomsListEl.appendChild(tag);
+    });
+  }
+
+  function updateRoomSelect(){
+    roomSelect.innerHTML = '';
+    if (!state.fullData || !state.fullData.rooms || !Object.keys(state.fullData.rooms).length) {
+      roomSelect.innerHTML = '<option>Load rooms first…</option>';
+      roomSelect.disabled = true;
+      return;
+    }
+    roomSelect.disabled = false;
+    Object.keys(state.fullData.rooms).sort().forEach(rid => {
+      const opt = document.createElement('option');
+      opt.value = rid;
+      opt.textContent = rid;
+      roomSelect.appendChild(opt);
+    });
+    if (!activeRoomId()) {
+      roomSelect.value = Object.keys(state.fullData.rooms)[0];
+    }
+  }
+
+  roomSelect.addEventListener('change', function(){
+    state.selected.clear();
+    state.clipboard = null;
+    loadRoom(activeRoomId());
+    refreshAll();
+  });
+
+  function loadRoom(roomId){
+    if (!state.fullData || !state.fullData.rooms[roomId]) {
+      state.booths = [];
+      state.naturalW = 0; state.naturalH = 0;
+      return;
+    }
+    const r = state.fullData.rooms[roomId];
+    state.booths = (r.booths || []).map(b => JSON.parse(JSON.stringify(b)));
+    state.naturalW = r.imageWidth || 0;
+    state.naturalH = r.imageHeight || 0;
+    baseImagePathInput.value = r.baseImage || '';
+  }
+
+  baseImagePathInput.addEventListener('change', function(){
+    if (state.fullData && state.fullData.rooms && state.fullData.rooms[activeRoomId()]) {
+      state.fullData.rooms[activeRoomId()].baseImage = baseImagePathInput.value;
+    }
+    loadImage();
+  });
+
+  // ---------- Image Loading ----------
+  function loadImage(){
+    const path = baseImagePathInput.value.trim();
+    if (!path) {
+      canvasWrap.classList.add('empty');
+      baseImg.src = '';
+      imgStageWrap.style.display = 'none';
+      updateStatus();
+      return;
+    }
+    canvasWrap.classList.remove('empty');
+    baseImg.src = path;
+    baseImg.onload = function(){
+      state.naturalW = baseImg.naturalWidth;
+      state.naturalH = baseImg.naturalHeight;
+      if (state.fullData && state.fullData.rooms[activeRoomId()]) {
+        state.fullData.rooms[activeRoomId()].imageWidth = state.naturalW;
+        state.fullData.rooms[activeRoomId()].imageHeight = state.naturalH;
+      }
+      imgStageWrap.style.display = 'inline-block';
+      renderPins();
+      updateStatus();
+    };
+    baseImg.onerror = function(){
+      canvasWrap.classList.add('empty');
+      canvasWrap.innerHTML = '<div class="empty-hint">Image not found: <b>' + path + '</b><br>Check the path and try again.</div>';
+      updateStatus();
+    };
+  }
+
+  // ---------- Rendering ----------
+  function renderPins(){
+    const pins = imgStageWrap.querySelectorAll('.pin');
+    pins.forEach(p => p.remove());
+    state.booths.forEach((b, i) => {
+      const pin = document.createElement('div');
+      pin.className = 'pin';
+      if (state.selected.has(i)) pin.classList.add('selected');
+      pin.style.left = b.x + 'px';
+      pin.style.top = b.y + 'px';
+      pin.title = b.id + (b.label ? ' - ' + b.label : '');
+
+      const num = document.createElement('div');
+      num.className = 'num';
+      num.textContent = i + 1;
+      pin.appendChild(num);
+
+      const tag = document.createElement('div');
+      tag.className = 'tag';
+      tag.textContent = b.id + (b.label ? ' • ' + b.label : '');
+      pin.appendChild(tag);
+
+      pin.addEventListener('mousedown', function(e){
+        e.stopPropagation();
+        if (e.ctrlKey || e.metaKey) {
+          state.selected.has(i) ? state.selected.delete(i) : state.selected.add(i);
+        } else if (e.shiftKey) {
+          selectRange(i);
+        } else {
+          selectOnly(i);
+        }
+        renderPins();
+        renderDetails();
+        updateSelectionUI();
+        pin.addEventListener('drag', function(e){ if (e.clientX || e.clientY) updatePinDrag(i, e); }, { once: true });
+      });
+
+      pin.draggable = true;
+      pin.addEventListener('dragstart', function(e){
+        if (!state.selected.has(i)) selectOnly(i);
+        e.dataTransfer.effectAllowed = 'move';
+      });
+
+      imgStageWrap.appendChild(pin);
+    });
+    renderList();
+  }
+
+  function updatePinDrag(i, e){
+    const rect = imgStageWrap.getBoundingClientRect();
+    const x = Math.round((e.clientX - rect.left) / state.zoom);
+    const y = Math.round((e.clientY - rect.top) / state.zoom);
+    state.booths[i].x = Math.max(0, Math.min(x, state.naturalW));
+    state.booths[i].y = Math.max(0, Math.min(y, state.naturalH));
+    if (snapToggle.checked) {
+      state.booths[i].x = Math.round(state.booths[i].x / state.gridSize) * state.gridSize;
+      state.booths[i].y = Math.round(state.booths[i].y / state.gridSize) * state.gridSize;
+    }
+    saveRoom();
+    renderPins();
+  }
+
+  function saveRoom(){
+    const rid = activeRoomId();
+    if (state.fullData && state.fullData.rooms && state.fullData.rooms[rid]) {
+      state.fullData.rooms[rid].booths = state.booths;
+    }
+  }
+
+  function refreshAll(){
+    loadImage();
+    renderPins();
+    renderDetails();
+    updateSelectionUI();
+    renderList();
+    updateStatus();
+  }
+
+  // ---------- Canvas Interaction ----------
+  imgStageWrap.addEventListener('click', function(e){
+    if (e.target.closest('.pin')) return;
+    const rect = imgStageWrap.getBoundingClientRect();
+    let x = Math.round((e.clientX - rect.left) / state.zoom);
+    let y = Math.round((e.clientY - rect.top) / state.zoom);
+    if (snapToggle.checked) {
+      x = Math.round(x / state.gridSize) * state.gridSize;
+      y = Math.round(y / state.gridSize) * state.gridSize;
+    }
+    addBooth(x, y);
+  });
+
+  function addBooth(x, y){
+    const id = (nextIdInput.value.trim() || 'booth-' + (state.booths.length + 1));
+    const label = nextLabelInput.value.trim();
+    const booth = { id, x, y };
+    if (label) booth.label = label;
+    state.booths.push(booth);
+    saveRoom();
+    nextIdInput.value = '';
+    nextLabelInput.value = '';
+    state.selected.clear();
+    state.selected.add(state.booths.length - 1);
+    refreshAll();
+  }
+
+  nextIdInput.addEventListener('keypress', function(e){
+    if (e.key === 'Enter') {
+      addBooth(state.naturalW / 2, state.naturalH / 2);
+    }
+  });
+
+  nextLabelInput.addEventListener('keypress', function(e){
+    if (e.key === 'Enter') {
+      addBooth(state.naturalW / 2, state.naturalH / 2);
+    }
+  });
+
+  // ---------- Zoom & Grid ----------
+  zoomSlider.addEventListener('input', function(){
+    state.zoom = parseFloat(zoomSlider.value);
+    zoomDisplay.textContent = Math.round(state.zoom * 100) + '%';
+    imgStageWrap.style.transform = 'scale(' + state.zoom + ')';
+    imgStageWrap.style.transformOrigin = 'top left';
+    drawGrid();
+  });
+
+  gridToggle.addEventListener('change', function(){
+    state.gridOn = gridToggle.checked;
+    drawGrid();
+  });
+
+  gridSizeInput.addEventListener('input', function(){
+    state.gridSize = parseInt(gridSizeInput.value);
+    drawGrid();
+  });
+
+  function drawGrid(){
+    const ctx = gridOverlay.getContext('2d');
+    gridOverlay.width = gridOverlay.offsetWidth;
+    gridOverlay.height = gridOverlay.offsetHeight;
+    if (!state.gridOn || !baseImg.src) return;
+    ctx.strokeStyle = 'rgba(79,157,222,0.1)';
+    ctx.lineWidth = 1;
+    const sz = state.gridSize * state.zoom;
+    for (let x = 0; x < gridOverlay.width; x += sz) {
+      ctx.beginPath();
+      ctx.moveTo(x, 0);
+      ctx.lineTo(x, gridOverlay.height);
+      ctx.stroke();
+    }
+    for (let y = 0; y < gridOverlay.height; y += sz) {
+      ctx.beginPath();
+      ctx.moveTo(0, y);
+      ctx.lineTo(gridOverlay.width, y);
+      ctx.stroke();
+    }
+  }
+
+  window.addEventListener('resize', drawGrid);
+
+  // ---------- Selection & Operations ----------
+  function selectOnly(i){
+    state.selected.clear();
+    state.selected.add(i);
+  }
+
+  function selectRange(i){
+    const min = Math.min(...state.selected, i);
+    const max = Math.max(...state.selected, i);
+    for (let j = min; j <= max; j++) state.selected.add(j);
+  }
+
+  function updateSelectionUI(){
+    const n = state.selected.size;
+    selectionCountEl.textContent = n ? n + ' selected' : '';
+    deleteSelectedBtn.disabled = !n;
+    copySelectedBtn.disabled = !n;
+    alignGridBtn.disabled = !n;
+  }
+
+  selectAllBtn.addEventListener('click', function(){
+    state.booths.forEach((_, i) => state.selected.add(i));
+    renderPins();
+    updateSelectionUI();
+    renderDetails();
+  });
+
+  selectNoneBtn.addEventListener('click', function(){
+    state.selected.clear();
+    renderPins();
+    updateSelectionUI();
+    renderDetails();
+  });
+
+  deleteSelectedBtn.addEventListener('click', function(){
+    const indices = Array.from(state.selected).sort((a, b) => b - a);
+    indices.forEach(i => state.booths.splice(i, 1));
+    state.selected.clear();
+    saveRoom();
+    refreshAll();
+  });
+
+  copySelectedBtn.addEventListener('click', function(){
+    state.clipboard = Array.from(state.selected).map(i => JSON.parse(JSON.stringify(state.booths[i])));
+    setStatus('Copied ' + state.clipboard.length + ' booth(s)');
+  });
+
+  alignGridBtn.addEventListener('click', function(){
+    Array.from(state.selected).forEach(i => {
+      state.booths[i].x = Math.round(state.booths[i].x / state.gridSize) * state.gridSize;
+      state.booths[i].y = Math.round(state.booths[i].y / state.gridSize) * state.gridSize;
+    });
+    saveRoom();
+    renderPins();
+  });
+
+  // ---------- Details ----------
+  function renderDetails(){
+    const n = state.selected.size;
+    if (n === 0) {
+      detailsEmpty.textContent = 'Select a booth (click a pin, or click a row in the list below) to add a description and social links.';
+      detailsEmpty.style.display = 'block';
+      detailsForm.style.display = 'none';
+      return;
+    }
+    if (n > 1) {
+      detailsEmpty.textContent = n + ' booths selected. Use Align to Grid, Copy, or Delete Selected above — description/link editing needs a single booth.';
+      detailsEmpty.style.display = 'block';
+      detailsForm.style.display = 'none';
+      return;
+    }
+    const i = primarySelectedIndex();
+    const b = state.booths[i];
+    if (!b) { detailsEmpty.style.display = 'block'; detailsForm.style.display = 'none'; return; }
+    detailsEmpty.style.display = 'none';
+    detailsForm.style.display = 'block';
+    if (!Array.isArray(b.socials)) b.socials = [];
+    descInput.value = b.description || '';
+    renderSocialsList(b);
+  }
+
+  function primarySelectedIndex(){
+    return Math.min(...state.selected);
+  }
+
+  function renderSocialsList(b){
+    socialsList.innerHTML = '';
+    b.socials.forEach((s, j) => {
+      const row = document.createElement('div');
+      row.className = 'social-row';
+
+      const platformInput = document.createElement('input');
+      platformInput.placeholder = 'Platform';
+      platformInput.value = s.platform || '';
+      platformInput.addEventListener('input', function(){ s.platform = platformInput.value; });
+
+      const urlInput = document.createElement('input');
+      urlInput.placeholder = 'https://…';
+      urlInput.value = s.url || '';
+      urlInput.addEventListener('input', function(){ s.url = urlInput.value; });
+
+      const rm = document.createElement('button');
+      rm.type = 'button'; rm.className = 'del'; rm.textContent = '×'; rm.title = 'Remove link';
+      rm.addEventListener('click', function(){ b.socials.splice(j, 1); renderSocialsList(b); });
+
+      row.appendChild(platformInput); row.appendChild(urlInput); row.appendChild(rm);
+      socialsList.appendChild(row);
+    });
+  }
+
+  descInput.addEventListener('input', function(){
+    const i = primarySelectedIndex();
+    if (i < 0) return;
+    state.booths[i].description = descInput.value;
+  });
+
+  addSocialBtn.addEventListener('click', function(){
+    const i = primarySelectedIndex();
+    if (i < 0) return;
+    const b = state.booths[i];
+    if (!Array.isArray(b.socials)) b.socials = [];
+    b.socials.push({ platform: '', url: '' });
+    renderSocialsList(b);
+  });
+
+  // ---------- List ----------
+  function renderList(){
+    const filter = searchEl.value.trim().toLowerCase();
+    boothList.innerHTML = '';
+    countEl.textContent = state.booths.length;
+
+    state.booths.forEach((b, i) => {
+      const hay = (b.id + ' ' + (b.label||'')).toLowerCase();
+      if (filter && !hay.includes(filter)) return;
+      const li = document.createElement('li');
+      if (state.selected.has(i)) li.classList.add('selected');
+
+      const row1 = document.createElement('div');
+      row1.className = 'row1';
+
+      const idInput = document.createElement('input');
+      idInput.className = 'id-input';
+      idInput.value = b.id;
+      idInput.addEventListener('change', function(){ b.id = idInput.value.trim() || b.id; renderPins(); });
+      idInput.addEventListener('focus', function(){ selectOnly(i); renderPins(); renderDetails(); updateSelectionUI(); });
+
+      const labelInput = document.createElement('input');
+      labelInput.className = 'label-input';
+      labelInput.placeholder = '(name)';
+      labelInput.value = b.label || '';
+      labelInput.addEventListener('change', function(){ b.label = labelInput.value.trim(); renderPins(); });
+      labelInput.addEventListener('focus', function(){ selectOnly(i); renderPins(); renderDetails(); updateSelectionUI(); });
+
+      const del = document.createElement('button');
+      del.className = 'del'; del.textContent = '×'; del.title = 'Delete';
+      del.addEventListener('click', function(){
+        state.booths.splice(i, 1);
+        state.selected.delete(i);
+        saveRoom();
+        refreshAll();
+      });
+
+      row1.appendChild(idInput);
+      row1.appendChild(labelInput);
+      row1.appendChild(del);
+
+      const coords = document.createElement('div');
+      coords.className = 'coords';
+      coords.textContent = b.x + ', ' + b.y;
+
+      li.appendChild(row1);
+      li.appendChild(coords);
+
+      li.addEventListener('click', function(){ selectOnly(i); renderPins(); renderDetails(); updateSelectionUI(); });
+
+      boothList.appendChild(li);
+
+      if (state.selected.has(i)) li.scrollIntoView({ block: 'nearest' });
+    });
+  }
+
+  function updateStatus(){
+    const rid = activeRoomId();
+    setStatus(rid ? '"' + rid + '"  ·  ' + state.naturalW + '×' + state.naturalH + 'px  ·  ' + state.booths.length + ' booths' : '');
+  }
+
+  searchEl.addEventListener('input', function(){ renderList(); });
+
+  // ---------- Export ----------
+  exportBtn.addEventListener('click', function(){
+    if (!state.fullData || !Object.keys(state.fullData.rooms || {}).length) {
+      alert('No rooms loaded.');
+      return;
+    }
+    Object.keys(state.fullData.rooms).forEach(rid => {
+      const r = state.fullData.rooms[rid];
+      r.booths = (r.booths || []).map(b => {
+        const out = { id: b.id, x: b.x, y: b.y };
+        if (b.label) out.label = b.label;
+        if (b.description && b.description.trim()) out.description = b.description.trim();
+        const socials = (b.socials || []).filter(s => s.url && s.url.trim());
+        if (socials.length) out.socials = socials.map(s => ({ platform: (s.platform || '').trim(), url: s.url.trim() }));
+        return out;
+      });
+    });
+    downloadJson(state.fullData, 'booths.json');
+  });
+
+  function downloadJson(obj, filename){
+    const blob = new Blob([JSON.stringify(obj, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = filename;
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  // Append stage to canvas wrap
+  canvasWrap.innerHTML = '';
+  canvasWrap.appendChild(imgStageWrap);
+
+  setStatus('Ready. Load rooms to get started.');
+
+})();
+</script>
+</body>
+</html>
