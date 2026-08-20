@@ -28,10 +28,40 @@ export default function App() {
       .catch(err => setError(err.message))
   }, [])
 
-  // Scrolls to the galleries once a search pick actually lands in the DOM
-  // (i.e. after the room's checkbox state has been applied and its gallery
-  // has rendered) -- runs whenever selection changes, but only acts when
-  // that selection was flagged as coming from search.
+  // Parse URL search parameters once rooms data finishes loading
+  useEffect(() => {
+    if (!rooms) return
+
+    const params = new URLSearchParams(window.location.search)
+    const targetId = params.get('id') || params.get('booth') // Supports ?id=C2 or ?booth=C2
+
+    if (!targetId) return
+
+    const normalizedTarget = targetId.trim().toLowerCase()
+
+    // Scan through all rooms to find a booth with a matching ID
+    for (const [roomId, room] of Object.entries(rooms)) {
+      if (!Array.isArray(room.booths)) continue
+
+      const foundBooth = room.booths.find(
+        b => b.id && b.id.trim().toLowerCase() === normalizedTarget
+      )
+
+      if (foundBooth) {
+        // Enable room visibility and select the booth
+        setChecked(prev => ({ ...prev, [roomId]: true }))
+        setSelectedBooth({
+          booth: foundBooth,
+          roomId,
+          roomLabel: room.label || roomId,
+          scrollTo: true
+        })
+        break
+      }
+    }
+  }, [rooms])
+
+  // Scrolls to the galleries once a selection is active and flagged for scroll
   useEffect(() => {
     if (selectedBooth?.scrollTo) {
       galleryAnchorRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
@@ -51,8 +81,7 @@ export default function App() {
     setSelectedBooth({ booth, roomId, roomLabel: rooms?.[roomId]?.label || roomId, scrollTo: !!opts.scrollTo })
   }
 
-  // Used by search: turns on the booth's room (in case it wasn't already
-  // checked) and opens its detail panel, then scrolls it into view.
+  // Used by search: turns on the booth's room and opens its detail panel, then scrolls it into view
   function goToBooth(booth, roomId) {
     setChecked(prev => ({ ...prev, [roomId]: true }))
     selectBooth(booth, roomId, { scrollTo: true })
@@ -60,7 +89,7 @@ export default function App() {
 
   const selectedKey = selectedBooth ? selectedBooth.roomId + '::' + selectedBooth.booth.id : null
 
-  // Group rooms by their "group" field, preserving first-seen order.
+  // Group rooms by their "group" field
   const groups = []
   if (rooms) {
     const groupIndex = {}
