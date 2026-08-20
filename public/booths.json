@@ -864,7 +864,7 @@
         },
         {
           "id": "1038",
-          "label": "",
+          "label": "Radiant Grey",
           "x": 220,
           "y": 460,
           "description": "",
@@ -872,7 +872,7 @@
         },
         {
           "id": "939",
-          "label": "",
+          "label": "muddymelly",
           "x": 280,
           "y": 460,
           "description": "",
@@ -880,7 +880,7 @@
         },
         {
           "id": "1036",
-          "label": "",
+          "label": "Radiant Grey",
           "x": 220,
           "y": 500,
           "description": "",
@@ -888,7 +888,7 @@
         },
         {
           "id": "937",
-          "label": "",
+          "label": "Lightsintheskye Studios",
           "x": 280,
           "y": 500,
           "description": "",
@@ -896,7 +896,7 @@
         },
         {
           "id": "1034",
-          "label": "",
+          "label": "Dragon Child Graphics",
           "x": 220,
           "y": 560,
           "description": "",
@@ -904,7 +904,7 @@
         },
         {
           "id": "935",
-          "label": "",
+          "label": "Nestled Naga Studio",
           "x": 280,
           "y": 560,
           "description": "",
@@ -912,7 +912,7 @@
         },
         {
           "id": "1032",
-          "label": "",
+          "label": "Pew-PewStudio",
           "x": 220,
           "y": 620,
           "description": "",
@@ -920,7 +920,7 @@
         },
         {
           "id": "933",
-          "label": "",
+          "label": "Hiinatsu",
           "x": 280,
           "y": 620,
           "description": "",
@@ -928,7 +928,7 @@
         },
         {
           "id": "1030",
-          "label": "",
+          "label": "Cheeky Illustrations",
           "x": 220,
           "y": 680,
           "description": "",
@@ -936,7 +936,7 @@
         },
         {
           "id": "931",
-          "label": "",
+          "label": "Cassandra Byard: Insomniac Illustrations",
           "x": 280,
           "y": 680,
           "description": "",
@@ -944,7 +944,7 @@
         },
         {
           "id": "1022",
-          "label": "",
+          "label": "Derrick's Portraits",
           "x": 240,
           "y": 920,
           "description": "",
@@ -952,7 +952,7 @@
         },
         {
           "id": "923",
-          "label": "",
+          "label": "Luxilium Shop",
           "x": 300,
           "y": 920,
           "description": "",
@@ -960,7 +960,7 @@
         },
         {
           "id": "921",
-          "label": "",
+          "label": "Supernatural & Hermiones World",
           "x": 260,
           "y": 1040,
           "description": "",
@@ -986,126 +986,144 @@
           "x": 720,
           "y": 520,
           "socials": [],
-          "label": "Zach Aguilar"
+          "label": "Zach Aguilar",
+          "description": "Celebrity Row"
         },
         {
           "id": "3439",
           "x": 720,
           "y": 620,
           "socials": [],
-          "label": "Colleen Clinkenbeard"
+          "label": "Colleen Clinkenbeard",
+          "description": "Celebrity Row"
         },
         {
           "id": "3437",
           "x": 720,
           "y": 700,
           "socials": [],
-          "label": "J Michael Tatum"
+          "label": "J Michael Tatum",
+          "description": "Celebrity Row"
         },
         {
           "id": "3435",
           "x": 720,
           "y": 780,
           "socials": [],
-          "label": "Brandon McInnis"
+          "label": "Brandon McInnis",
+          "description": "Celebrity Row"
         },
         {
           "id": "3433",
           "x": 720,
           "y": 860,
           "socials": [],
-          "label": "Jamie Marchi"
+          "label": "Jamie Marchi",
+          "description": "Celebrity Row"
         },
         {
           "id": "3431",
           "x": 720,
           "y": 940,
           "socials": [],
-          "label": "Daniel Lasker"
+          "label": "Daniel Lasker",
+          "description": "Celebrity Row"
         },
         {
           "id": "3429",
           "x": 720,
           "y": 1020,
           "socials": [],
-          "label": "Martial T. Batchamen"
+          "label": "Martial T. Batchamen",
+          "description": "Celebrity Row"
         },
         {
           "id": "3427",
           "x": 720,
           "y": 1080,
           "socials": [],
-          "label": "Camrus Johnson"
+          "label": "Camrus Johnson",
+          "description": "Celebrity Row"
         },
         {
           "id": "3421",
           "x": 720,
           "y": 1160,
           "socials": [],
-          "label": "Michaela Jill Murphy"
+          "label": "Michaela Jill Murphy",
+          "description": "Celebrity Row"
         },
         {
           "id": "3419",
           "x": 720,
           "y": 1240,
           "socials": [],
-          "label": "Greg Baldwin"
+          "label": "Greg Baldwin",
+          "description": "Celebrity Row"
         },
         {
           "id": "3417",
           "x": 720,
           "y": 1320,
           "socials": [],
-          "label": "Janeet Varney"
+          "label": "Janeet Varney",
+          "description": "Celebrity Row"
         },
         {
           "id": "3415",
           "x": 720,
           "y": 1380,
           "socials": [],
-          "label": "Cherami Leigh"
+          "label": "Cherami Leigh",
+          "description": "Celebrity Row"
         },
         {
           "id": "3413",
           "x": 720,
           "y": 1460,
           "socials": [],
-          "label": "Michelle Ruff"
+          "label": "Michelle Ruff",
+          "description": "Celebrity Row"
         },
         {
           "id": "3411",
           "x": 720,
           "y": 1540,
           "socials": [],
-          "label": "Charlet Chung"
+          "label": "Charlet Chung",
+          "description": "Celebrity Row"
         },
         {
           "id": "3407",
           "x": 720,
           "y": 1620,
           "socials": [],
-          "label": "Jennie Kwan"
+          "label": "Jennie Kwan",
+          "description": "Celebrity Row"
         },
         {
           "id": "3405",
           "x": 720,
           "y": 1700,
           "socials": [],
-          "label": "Olivia Hack"
+          "label": "Olivia Hack",
+          "description": "Celebrity Row"
         },
         {
           "id": "3403",
           "x": 720,
           "y": 1820,
           "socials": [],
-          "label": "Jack DeSena"
+          "label": "Jack DeSena",
+          "description": "Celebrity Row"
         },
         {
           "id": "3401",
           "x": 720,
           "y": 1920,
           "socials": [],
-          "label": "Zach Eisen"
+          "label": "Zach Eisen",
+          "description": "Celebrity Row"
         },
         {
           "id": "1738",
@@ -1970,7 +1988,8 @@
           "id": "1001",
           "x": 2720,
           "y": 1800,
-          "socials": []
+          "socials": [],
+          "label": "Pixel Empire"
         },
         {
           "id": "2352",
@@ -2088,98 +2107,7 @@
       "baseImage": "images/rooms-1501.png",
       "imageWidth": null,
       "imageHeight": null,
-      "booths": [
-        {
-          "id": "944357",
-          "x": 0,
-          "y": 0,
-          "label": "Anime Kahoot Night :: Panel Room 1500"
-        },
-        {
-          "id": "944358",
-          "x": 0,
-          "y": 0,
-          "label": "Battle of The Vocaloids :: Panel Room 1500"
-        },
-        {
-          "id": "946804",
-          "x": 0,
-          "y": 0,
-          "label": "Planet Anime Karaoke :: Panel Room 1500"
-        },
-        {
-          "id": "946805",
-          "x": 0,
-          "y": 0,
-          "label": "PAKC Cosplay Moon Walk and Furry Parade :: Panel Room 1500"
-        },
-        {
-          "id": "946806",
-          "x": 0,
-          "y": 0,
-          "label": "Friday Night Ani-Rave at PAKC! (16+) :: Panel Room 1500"
-        },
-        {
-          "id": "946810",
-          "x": 0,
-          "y": 0,
-          "label": "Zen Hour :: Panel Room 1500"
-        },
-        {
-          "id": "944366",
-          "x": 0,
-          "y": 0,
-          "label": "Vital Instrument Crafting Contest :: Panel Room 1500"
-        },
-        {
-          "id": "944367",
-          "x": 0,
-          "y": 0,
-          "label": "Riders On The Sea; Sea Shanty Extravaganza (13+) :: Panel Room 1500"
-        },
-        {
-          "id": "946803",
-          "x": 0,
-          "y": 0,
-          "label": "A Demon Slayer Sleepover! :: Panel Room 1500"
-        },
-        {
-          "id": "944369",
-          "x": 0,
-          "y": 0,
-          "label": "J-Pop and Anime Random Play Dance! :: Panel Room 1500"
-        },
-        {
-          "id": "946811",
-          "x": 0,
-          "y": 0,
-          "label": "Planet Anime Karaoke :: Panel Room 1500"
-        },
-        {
-          "id": "946812",
-          "x": 0,
-          "y": 0,
-          "label": "Saturday Night Ani-Rave at PAKC! (16+) :: Panel Room 1500"
-        },
-        {
-          "id": "943486",
-          "x": 0,
-          "y": 0,
-          "label": "KC Idol✧Festival: Colorful Chorus J-Idol Festival :: Panel Room 1500"
-        },
-        {
-          "id": "943487",
-          "x": 0,
-          "y": 0,
-          "label": "KC Idol✧Festival: Intro to Idols (Idol Festivals, Wotagei, and More!) :: Panel Room 1500"
-        },
-        {
-          "id": "943488",
-          "x": 0,
-          "y": 0,
-          "label": "KC Idol✧Festival: J-Pop RDP :: Panel Room 1500"
-        }
-      ]
+      "booths": []
     },
     "ballroom": {
       "label": "Grand Ballroom (2501)",

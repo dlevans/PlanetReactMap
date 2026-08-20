@@ -21,16 +21,17 @@ export default function BoothSearch({ rooms, onGoToBooth }) {
     const q = query.trim().toLowerCase()
     if (!q) return []
     return index
-      .filter(({ booth }) =>
-        booth.id.toLowerCase().includes(q) || (booth.label || '').toLowerCase().includes(q)
+      .filter(({ booth, roomLabel }) =>
+        booth.id.toLowerCase().includes(q) || 
+        (booth.label || '').toLowerCase().includes(q) ||
+        (booth.description || '').toLowerCase().includes(q) ||
+        roomLabel.toLowerCase().includes(q)
       )
       .sort((a, b) => {
-        const aId = a.booth.id.toLowerCase(), bId = b.booth.id.toLowerCase()
-        const aExact = aId === q, bExact = bId === q
-        if (aExact !== bExact) return aExact ? -1 : 1
-        const aStarts = aId.startsWith(q), bStarts = bId.startsWith(q)
-        if (aStarts !== bStarts) return aStarts ? -1 : 1
-        return aId.localeCompare(bId)
+        // Sort by label (or ID if no label), then alphabetically
+        const aSort = (a.booth.label || a.booth.id).toLowerCase()
+        const bSort = (b.booth.label || b.booth.id).toLowerCase()
+        return aSort.localeCompare(bSort)
       })
       .slice(0, 25)
   }, [index, query])
