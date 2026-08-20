@@ -130,22 +130,26 @@
         {
           "id": "A10",
           "x": 1700,
-          "y": 1620
+          "y": 1620,
+          "label": "WALKIN' & ROLLIN' COSTUMES"
         },
         {
           "id": "A12",
           "x": 1840,
-          "y": 1620
+          "y": 1620,
+          "label": "HAMMERSPACE Community Wrksp & Makerspace"
         },
         {
           "id": "A15",
           "x": 2060,
-          "y": 1620
+          "y": 1620,
+          "label": "Cosplay Repair / Figments and Filaments"
         },
         {
           "id": "A17",
           "x": 2180,
-          "y": 1620
+          "y": 1620,
+          "label": "Amber Harvey Cosplay"
         },
         {
           "id": "CPMU",
@@ -167,57 +171,68 @@
         {
           "id": "A20",
           "x": 1660,
-          "y": 1480
+          "y": 1480,
+          "label": "Heart Of America Japan – America Society"
         },
         {
           "id": "A30",
           "x": 1620,
-          "y": 1420
+          "y": 1420,
+          "label": "Renewal by Andersen"
         },
         {
           "id": "A31",
           "x": 1660,
-          "y": 1420
+          "y": 1420,
+          "label": "Level One Game Shop"
         },
         {
           "id": "A32",
           "x": 1700,
-          "y": 1420
+          "y": 1420,
+          "label": "Paws & Prairies"
         },
         {
           "id": "A33",
           "x": 1740,
-          "y": 1420
+          "y": 1420,
+          "label": "LeafFilter Gutter Protection"
         },
         {
           "id": "A40",
           "x": 1620,
-          "y": 1320
+          "y": 1320,
+          "label": "From the Earth – Illicit"
         },
         {
           "id": "A41",
           "x": 1660,
-          "y": 1320
+          "y": 1320,
+          "label": "Pawn & Pint"
         },
         {
           "id": "A42",
           "x": 1700,
-          "y": 1320
+          "y": 1320,
+          "label": "Mindgames and Magic"
         },
         {
           "id": "A43",
           "x": 1740,
-          "y": 1320
+          "y": 1320,
+          "label": "Hague Quality Water"
         },
         {
           "id": "A50",
           "x": 1620,
-          "y": 1240
+          "y": 1240,
+          "label": "Boulevard Brewing Co."
         },
         {
           "id": "A51",
           "x": 1660,
-          "y": 1240
+          "y": 1240,
+          "label": "Naka-Kon"
         },
         {
           "id": "A52",
@@ -234,13 +249,13 @@
           "id": "A69",
           "x": 2480,
           "y": 1240,
-          "label": "KC Game On"
+          "label": "AEZ Esports Arena powered by LevelUP"
         },
         {
-          "id": "Information Booth2",
+          "id": "A81",
           "x": 2480,
           "y": 1100,
-          "label": "Information Booth"
+          "label": "Planet Anime Information Booth AEZ"
         },
         {
           "id": "Vendor",
@@ -376,93 +391,105 @@
         },
         {
           "id": "521",
-          "x": 1180,
-          "y": 1240,
-          "label": "BBZ Customs"
+          "x": 960,
+          "y": 1040,
+          "label": "BBZ Customs",
+          "socials": []
         },
         {
           "id": "621",
-          "x": 900,
-          "y": 1240,
-          "label": "MDRN OTAKU"
+          "x": 800,
+          "y": 1040,
+          "label": "MDRN OTAKU",
+          "socials": []
         },
         {
           "id": "720",
-          "x": 820,
-          "y": 1240,
-          "label": "Fandom HD"
+          "x": 720,
+          "y": 1040,
+          "label": "Fandom HD",
+          "socials": []
         },
         {
           "id": "721",
-          "x": 640,
-          "y": 1240,
-          "label": "Utopia Toys and Models"
+          "x": 540,
+          "y": 1040,
+          "label": "Utopia Toys and Models",
+          "socials": []
         },
         {
           "id": "820",
-          "x": 600,
-          "y": 1240,
-          "label": "Painted Dragon Studios"
+          "x": 480,
+          "y": 1040,
+          "label": "Painted Dragon Studios",
+          "socials": []
         },
         {
           "id": "821",
-          "x": 320,
-          "y": 1240,
-          "label": "triforce cosplay and accessories"
+          "x": 360,
+          "y": 1040,
+          "label": "triforce cosplay and accessories",
+          "socials": []
         },
         {
           "id": "825",
-          "x": 320,
-          "y": 1200,
+          "x": 360,
+          "y": 860,
           "label": "Haha Anime and Games"
         },
         {
           "id": "824",
-          "x": 600,
-          "y": 1200,
-          "label": "KC Book Beat"
+          "x": 480,
+          "y": 860,
+          "label": "KC Book Beat",
+          "socials": []
         },
         {
           "id": "725",
-          "x": 640,
-          "y": 1200,
-          "label": "Blaze Manga Productions"
+          "x": 560,
+          "y": 860,
+          "label": "Blaze Manga Productions",
+          "socials": []
         },
         {
           "id": "724",
-          "x": 820,
-          "y": 1200,
+          "x": 720,
+          "y": 860,
           "label": "Atelier in April"
         },
         {
           "id": "625",
-          "x": 900,
-          "y": 1200,
+          "x": 800,
+          "y": 860,
           "label": "Brett Woods Fine Art"
         },
         {
           "id": "525",
-          "x": 1180,
-          "y": 1200,
-          "label": "Musetap Studios"
+          "x": 940,
+          "y": 860,
+          "label": "Musetap Studios",
+          "socials": []
         },
         {
           "id": "622",
-          "x": 1100,
-          "y": 1220,
-          "label": "The Witch and The Geek"
+          "x": 880,
+          "y": 900,
+          "label": "The Witch and The Geek",
+          "socials": []
         },
         {
           "id": "523",
-          "x": 1180,
-          "y": 1220,
-          "label": "Arie Monroe"
+          "x": 940,
+          "y": 900,
+          "label": "Arie Monroe",
+          "socials": []
         },
         {
           "id": "624",
-          "x": 1100,
-          "y": 1200,
-          "label": "Krecic, Leeanne"
+          "x": 880,
+          "y": 860,
+          "label": "Krecic, Leeanne",
+          "socials": []
         },
         {
           "id": "2245",
@@ -562,271 +589,271 @@
         },
         {
           "id": "938",
-          "x": 280,
-          "y": 340,
+          "x": 380,
+          "y": 460,
           "label": "Dragon Feathers Illustration"
         },
         {
           "id": "936",
-          "x": 280,
-          "y": 400,
+          "x": 380,
+          "y": 500,
           "label": "Freakijiki"
         },
         {
           "id": "934",
-          "x": 280,
-          "y": 500,
+          "x": 380,
+          "y": 560,
           "label": "Jenafrid Art"
         },
         {
           "id": "932",
-          "x": 280,
-          "y": 600,
+          "x": 380,
+          "y": 620,
           "label": "Andy Arcana"
         },
         {
           "id": "930",
-          "x": 280,
-          "y": 700,
+          "x": 380,
+          "y": 680,
           "label": "Bri Crozier Art"
         },
         {
           "id": "839",
-          "x": 320,
-          "y": 340,
+          "x": 420,
+          "y": 460,
           "label": "Art Chica Marcum"
         },
         {
           "id": "837",
-          "x": 320,
-          "y": 400,
+          "x": 420,
+          "y": 500,
           "label": "Art Chica Marcum"
         },
         {
           "id": "835",
-          "x": 320,
-          "y": 500,
+          "x": 420,
+          "y": 560,
           "label": "Nana Marchae Art"
         },
         {
           "id": "833",
-          "x": 320,
-          "y": 600,
+          "x": 420,
+          "y": 620,
           "label": "Crazy Red Artist"
         },
         {
           "id": "831",
-          "x": 320,
-          "y": 700,
+          "x": 420,
+          "y": 680,
           "label": "Crazy Red Artist"
         },
         {
           "id": "838",
           "x": 520,
-          "y": 340,
+          "y": 460,
           "label": "Sykopop"
         },
         {
           "id": "836",
           "x": 520,
-          "y": 400,
+          "y": 500,
           "label": "Smolmilkyways"
         },
         {
           "id": "834",
           "x": 520,
-          "y": 500,
+          "y": 560,
           "label": "IsaacRetroArt"
         },
         {
           "id": "832",
           "x": 520,
-          "y": 600,
+          "y": 620,
           "label": "Yimmygee"
         },
         {
           "id": "830",
           "x": 520,
-          "y": 700,
+          "y": 680,
           "label": "Art of David Wong"
         },
         {
           "id": "739",
           "x": 560,
-          "y": 340,
+          "y": 460,
           "label": "Supernova Art Studio"
         },
         {
           "id": "737",
           "x": 560,
-          "y": 400,
+          "y": 500,
           "label": "Speedlag"
         },
         {
           "id": "735",
           "x": 560,
-          "y": 500,
+          "y": 560,
           "label": "Jason Turner Art"
         },
         {
           "id": "733",
           "x": 560,
-          "y": 600,
+          "y": 620,
           "label": "Jason Turner Art"
         },
         {
           "id": "731",
           "x": 560,
-          "y": 700,
+          "y": 680,
           "label": "MallyJanks"
         },
         {
           "id": "738",
           "x": 720,
-          "y": 340,
+          "y": 460,
           "label": "MissGreenKitty"
         },
         {
           "id": "736",
           "x": 720,
-          "y": 400,
+          "y": 500,
           "label": "onemegawatt"
         },
         {
           "id": "734",
           "x": 720,
-          "y": 500,
+          "y": 560,
           "label": "Inksmoker Studio"
         },
         {
           "id": "732",
           "x": 720,
-          "y": 600,
+          "y": 620,
           "label": "Empty Echo"
         },
         {
           "id": "730",
           "x": 720,
-          "y": 700,
+          "y": 680,
           "label": "Phib Studios"
         },
         {
           "id": "639",
           "x": 760,
-          "y": 340,
+          "y": 460,
           "label": "Blacksunflower Studios"
         },
         {
           "id": "637",
           "x": 760,
-          "y": 400,
+          "y": 500,
           "label": "EmbyMarissa"
         },
         {
           "id": "635",
           "x": 760,
-          "y": 500,
+          "y": 560,
           "label": "EmbyMarissa"
         },
         {
           "id": "633",
           "x": 760,
-          "y": 600,
+          "y": 620,
           "label": "RFCreations"
         },
         {
           "id": "631",
           "x": 760,
-          "y": 700,
+          "y": 680,
           "label": "LucidSky"
         },
         {
           "id": "638",
           "x": 880,
-          "y": 340,
+          "y": 460,
           "label": "Soviviii"
         },
         {
           "id": "636",
           "x": 880,
-          "y": 400
+          "y": 500
         },
         {
           "id": "634",
           "x": 880,
-          "y": 500,
+          "y": 560,
           "label": "Shouaart"
         },
         {
           "id": "632",
           "x": 880,
-          "y": 600,
+          "y": 620,
           "label": "SaBasse Studios"
         },
         {
           "id": "630",
           "x": 880,
-          "y": 700,
+          "y": 680,
           "label": "takosumi"
         },
         {
           "id": "539",
           "x": 920,
-          "y": 340,
+          "y": 460,
           "label": "Painty's Corner"
         },
         {
           "id": "537",
           "x": 920,
-          "y": 400,
+          "y": 500,
           "label": "Olivia Oltmanns Art"
         },
         {
           "id": "535",
           "x": 920,
-          "y": 500,
+          "y": 560,
           "label": "Fenton, Josie"
         },
         {
           "id": "533",
           "x": 920,
-          "y": 600,
+          "y": 620,
           "label": "Caitieboo"
         },
         {
           "id": "531",
           "x": 920,
-          "y": 700,
+          "y": 680,
           "label": "Monkey Minion Press – Dane Ault"
         },
         {
           "id": "538",
           "x": 1040,
-          "y": 340,
+          "y": 460,
           "label": "Magical Mews"
         },
         {
           "id": "536",
           "x": 1040,
-          "y": 400,
+          "y": 500,
           "label": "TangolaDude"
         },
         {
           "id": "534",
           "x": 1040,
-          "y": 500,
+          "y": 560,
           "label": "Tabrakadabra"
         },
         {
           "id": "532",
           "x": 1040,
-          "y": 600,
+          "y": 620,
           "label": "Kluthe, Andy"
         },
         {
           "id": "530",
           "x": 1040,
-          "y": 700,
+          "y": 680,
           "label": "Champion Comics"
         },
         {
@@ -834,6 +861,110 @@
           "x": 2220,
           "y": 2080,
           "label": "Sparqy Cosplay"
+        },
+        {
+          "id": "1038",
+          "label": "",
+          "x": 220,
+          "y": 460,
+          "description": "",
+          "socials": []
+        },
+        {
+          "id": "939",
+          "label": "",
+          "x": 280,
+          "y": 460,
+          "description": "",
+          "socials": []
+        },
+        {
+          "id": "1036",
+          "label": "",
+          "x": 220,
+          "y": 500,
+          "description": "",
+          "socials": []
+        },
+        {
+          "id": "937",
+          "label": "",
+          "x": 280,
+          "y": 500,
+          "description": "",
+          "socials": []
+        },
+        {
+          "id": "1034",
+          "label": "",
+          "x": 220,
+          "y": 560,
+          "description": "",
+          "socials": []
+        },
+        {
+          "id": "935",
+          "label": "",
+          "x": 280,
+          "y": 560,
+          "description": "",
+          "socials": []
+        },
+        {
+          "id": "1032",
+          "label": "",
+          "x": 220,
+          "y": 620,
+          "description": "",
+          "socials": []
+        },
+        {
+          "id": "933",
+          "label": "",
+          "x": 280,
+          "y": 620,
+          "description": "",
+          "socials": []
+        },
+        {
+          "id": "1030",
+          "label": "",
+          "x": 220,
+          "y": 680,
+          "description": "",
+          "socials": []
+        },
+        {
+          "id": "931",
+          "label": "",
+          "x": 280,
+          "y": 680,
+          "description": "",
+          "socials": []
+        },
+        {
+          "id": "1022",
+          "label": "",
+          "x": 240,
+          "y": 920,
+          "description": "",
+          "socials": []
+        },
+        {
+          "id": "923",
+          "label": "",
+          "x": 300,
+          "y": 920,
+          "description": "",
+          "socials": []
+        },
+        {
+          "id": "921",
+          "label": "",
+          "x": 260,
+          "y": 1040,
+          "description": "",
+          "socials": []
         }
       ]
     },
@@ -848,8 +979,7 @@
           "id": "ADA Guest Services",
           "x": 1160,
           "y": 220,
-          "socials": [],
-          "label": "ADA Guest Services"
+          "socials": []
         },
         {
           "id": "3441",
@@ -1369,7 +1499,7 @@
         },
         {
           "id": "1039",
-          "x": 2760,
+          "x": 2780,
           "y": 460,
           "socials": []
         },
@@ -1716,11 +1846,10 @@
           "socials": []
         },
         {
-          "id": "Information Booth1",
+          "id": "Information Booth",
           "x": 1400,
           "y": 2140,
-          "socials": [],
-          "label": "Information Booth"
+          "socials": []
         },
         {
           "id": "1602",
