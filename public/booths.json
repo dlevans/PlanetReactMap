@@ -237,7 +237,7 @@
           "label": "KC Game On"
         },
         {
-          "id": "A81",
+          "id": "Information Booth2",
           "x": 2480,
           "y": 1100,
           "label": "Information Booth"
@@ -848,7 +848,8 @@
           "id": "ADA Guest Services",
           "x": 1160,
           "y": 220,
-          "socials": []
+          "socials": [],
+          "label": "ADA Guest Services"
         },
         {
           "id": "3441",
@@ -1715,10 +1716,11 @@
           "socials": []
         },
         {
-          "id": "Information Booth",
+          "id": "Information Booth1",
           "x": 1400,
           "y": 2140,
-          "socials": []
+          "socials": [],
+          "label": "Information Booth"
         },
         {
           "id": "1602",
