@@ -1,0 +1,42 @@
+{
+  "room": "hall-e",
+  "imageWidth": 2805,
+  "imageHeight": 2384,   
+  "items": [
+    {
+      "id": "table-1787720990364",
+      "x": 875,
+      "y": 780,
+      "type": "table",
+      "label": "",
+      "width": 20,
+      "height": 7,
+      "orientation": "horizontal",
+      "rotation": 0
+    },
+    {
+      "id": "table-1787720992566",
+      "x": 1680,
+      "y": 1095,
+      "type": "table",
+      "label": "",
+      "width": 20,
+      "height": 7,
+      "orientation": "horizontal",
+      "rotation": 0
+    },
+    {
+      "id": "booth-1787720997795",
+      "x": 810,
+      "y": 1190,
+      "type": "booth",
+      "label": "",
+      "width": 30,
+      "height": 30,
+      "orientation": "single",
+      "rotation": 0,
+      "color": "#ef4444"
+    }
+  ],
+  "exportedAt": "2026-08-26T05:10:01.897Z"
+}

@@ -10,22 +10,50 @@ import ExhibitionHall from './ExhibitionHall.jsx'
 import Arena from './Arena.jsx'
 import LittleTheater from './LittleTheater.jsx'
 import MusicHall from './MusicHall.jsx'
+import { convertRoomJson, ROOM_METADATA, ALL_ROOM_IDS } from './Roomconverter.jsx'
 
 export default function App() {
-  const [rooms, setRooms] = useState(null)   // booths.json -> data.rooms
-  const [checked, setChecked] = useState({}) // roomId -> bool
+  const [rooms, setRooms] = useState(null)
+  const [checked, setChecked] = useState({})
   const [error, setError] = useState(null)
-  const [selectedBooth, setSelectedBooth] = useState(null) // { booth, roomId, roomLabel, scrollTo } | null
+  const [selectedBooth, setSelectedBooth] = useState(null)
   const galleryAnchorRef = useRef(null)
 
+  // Load all individual room JSON files from /rooms/ folder
   useEffect(() => {
-    fetch('/booths.json')
-      .then(res => {
-        if (!res.ok) throw new Error('HTTP ' + res.status)
-        return res.json()
-      })
-      .then(data => setRooms(data.rooms || {}))
-      .catch(err => setError(err.message))
+    async function loadRooms() {
+      try {
+        const loadedRooms = {}
+        const errors = []
+
+        // Load each room file
+        for (const roomId of ALL_ROOM_IDS) {
+          try {
+            const response = await fetch(`/rooms/${roomId}.json`)
+            if (!response.ok) {
+              // Room file doesn't exist yet, skip it
+              continue
+            }
+
+            const roomJson = await response.json()
+            const metadata = ROOM_METADATA[roomId]
+            loadedRooms[roomId] = convertRoomJson(roomJson, metadata)
+          } catch (err) {
+            errors.push(`${roomId}: ${err.message}`)
+          }
+        }
+
+        if (Object.keys(loadedRooms).length === 0) {
+          throw new Error(`No room files loaded. Check that room JSON files exist in /rooms/ folder.${errors.length > 0 ? ' Errors: ' + errors.join(', ') : ''}`)
+        }
+
+        setRooms(loadedRooms)
+      } catch (err) {
+        setError(err.message)
+      }
+    }
+
+    loadRooms()
   }, [])
 
   // Parse URL search parameters once rooms data finishes loading
@@ -33,25 +61,24 @@ export default function App() {
     if (!rooms) return
 
     const params = new URLSearchParams(window.location.search)
-    const targetId = params.get('id') || params.get('booth') // Supports ?id=C2 or ?booth=C2
+    const targetId = params.get('id') || params.get('booth')
 
     if (!targetId) return
 
     const normalizedTarget = targetId.trim().toLowerCase()
 
-    // Scan through all rooms to find a booth with a matching ID
+    // Scan through all rooms to find an item with a matching ID
     for (const [roomId, room] of Object.entries(rooms)) {
-      if (!Array.isArray(room.booths)) continue
+      if (!Array.isArray(room.items)) continue
 
-      const foundBooth = room.booths.find(
-        b => b.id && b.id.trim().toLowerCase() === normalizedTarget
+      const foundItem = room.items.find(
+        item => item.id && item.id.trim().toLowerCase() === normalizedTarget
       )
 
-      if (foundBooth) {
-        // Enable room visibility and select the booth
+      if (foundItem) {
         setChecked(prev => ({ ...prev, [roomId]: true }))
         setSelectedBooth({
-          booth: foundBooth,
+          booth: foundItem,
           roomId,
           roomLabel: room.label || roomId,
           scrollTo: true
@@ -77,14 +104,14 @@ export default function App() {
     setSelectedBooth(null)
   }
 
-  function selectBooth(booth, roomId, opts = {}) {
-    setSelectedBooth({ booth, roomId, roomLabel: rooms?.[roomId]?.label || roomId, scrollTo: !!opts.scrollTo })
+  function selectBooth(item, roomId, opts = {}) {
+    setSelectedBooth({ booth: item, roomId, roomLabel: rooms?.[roomId]?.label || roomId, scrollTo: !!opts.scrollTo })
   }
 
-  // Used by search: turns on the booth's room and opens its detail panel, then scrolls it into view
-  function goToBooth(booth, roomId) {
+  // Used by search: turns on the item's room and opens its detail panel, then scrolls it into view
+  function goToBooth(item, roomId) {
     setChecked(prev => ({ ...prev, [roomId]: true }))
-    selectBooth(booth, roomId, { scrollTo: true })
+    selectBooth(item, roomId, { scrollTo: true })
   }
 
   const selectedKey = selectedBooth ? selectedBooth.roomId + '::' + selectedBooth.booth.id : null
@@ -113,7 +140,7 @@ export default function App() {
 
         {error && (
           <p className="loading-msg error">
-            Couldn't load booths.json ({error}). Make sure booths.json is in the <code>public/</code> folder
+            Couldn't load rooms ({error}). Make sure room JSON files are in the <code>public/rooms/</code> folder
             and the dev server is running (<code>npm run dev</code>).
           </p>
         )}
@@ -148,7 +175,7 @@ export default function App() {
                   key={id}
                   className="room-layer"
                   style={{ opacity: checked[id] ? 1 : 0 }}
-                  src={'/' + room.baseImage}
+                  src={room.baseImage}
                   alt={room.label || id}
                 />
               )

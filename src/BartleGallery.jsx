@@ -1,5 +1,5 @@
 import ZoomPanViewport from './ZoomPanViewport.jsx'
-import BoothPin from './BoothPin.jsx'
+import ItemPin from './ItemPin.jsx'
 
 // Order matches the original left-to-right layout (E through A).
 const HALLS = ['hall-e', 'hall-d', 'hall-c', 'hall-b', 'hall-a']
@@ -22,24 +22,26 @@ export default function BartleGallery({ checked, rooms, onSelectBooth, selectedK
 }
 
 function HallImage({ id, room, onSelectBooth, selectedKey }) {
-  const booths = room?.booths
+  const items = room?.items
   const imageWidth = room?.imageWidth
   const imageHeight = room?.imageHeight
-  const hasPins = Array.isArray(booths) && booths.length > 0 && imageWidth && imageHeight
+  const hasItems = Array.isArray(items) && items.length > 0 && imageWidth && imageHeight
 
   return (
     <div className="hall-image-wrap">
       <img className="hall-image" src={`/images/top_down/bartle_hall/${id}.png`} alt={id} draggable={false} />
-      {hasPins && (
+      {hasItems && (
         <div className="pins-overlay">
-          {booths.map(b => (
-            <BoothPin
-              key={b.id}
-              booth={b}
-              xPct={b.x / imageWidth * 100}
-              yPct={b.y / imageHeight * 100}
-              selected={selectedKey === id + '::' + b.id}
-              onClick={() => onSelectBooth?.(b, id)}
+          {items.map(item => (
+            <ItemPin
+              key={item.id}
+              item={item}
+              xPct={item.x / imageWidth * 100}
+              yPct={item.y / imageHeight * 100}
+              imageWidth={imageWidth}
+              imageHeight={imageHeight}
+              selected={selectedKey === id + '::' + item.id}
+              onClick={() => onSelectBooth?.(item, id)}
             />
           ))}
         </div>

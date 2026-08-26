@@ -177,8 +177,8 @@ label input[type="checkbox"] { display: none; }
 }
 
 /* --- Bartle Hall Gallery (Continuous Strip) ---
-   Same technique as the original: fixed-height images, width auto,
-   zero gap -- so consecutive halls stitch together edge-to-edge. --- */
+   Increased height from 400px to 1000px to match builder resolution detail.
+   Images scale proportionally to maintain aspect ratio. --- */
 .top-down-gallery {
     padding: 20px;
     border-top: 1px solid #555;
@@ -192,12 +192,15 @@ label input[type="checkbox"] { display: none; }
 }
 
 .hall-image-wrap { position: relative; line-height: 0; }
-.hall-image { height: 400px; width: auto; display: block; }
+.hall-image { 
+    height: 1000px;
+    width: auto; 
+    display: block; 
+}
 
 /* --- Great Hall Puzzle Grid ---
-   Original fixed-column-width technique restored: grid-template-columns
-   sets each piece's width, images fill their cell at width:100% -- so
-   pieces tile into one seamless floor plan again. --- */
+   Increased column widths to match higher resolution rendering.
+   Original widths: 308px 318px; New: 600px 620px --- */
 .great-hall-gallery-wrap {
     padding: 20px;
     border-top: 1px solid #555;
@@ -206,7 +209,7 @@ label input[type="checkbox"] { display: none; }
 
 .great-hall-puzzle-grid {
     display: grid;
-    grid-template-columns: 308px 318px;
+    grid-template-columns: 600px 620px;
     gap: 0;
     line-height: 0;
 }

@@ -1,0 +1,56 @@
+{
+  "room": "hall-c",
+  "imageWidth": 2138,
+  "imageHeight": 2384,    
+  "items": [
+    {
+      "id": "booth-1787720899640",
+      "x": 700,
+      "y": 740,
+      "type": "booth",
+      "label": "",
+      "width": 30,
+      "height": 30,
+      "orientation": "single",
+      "rotation": 0,
+      "color": "#ef4444"
+    },
+    {
+      "id": "booth-1787720903207",
+      "x": 1020,
+      "y": 1050,
+      "type": "booth",
+      "label": "",
+      "width": 30,
+      "height": 30,
+      "orientation": "single",
+      "rotation": 0,
+      "color": "#22c55e"
+    },
+    {
+      "id": "booth-1787720906451",
+      "x": 725,
+      "y": 1365,
+      "type": "booth",
+      "label": "",
+      "width": 30,
+      "height": 30,
+      "orientation": "single",
+      "rotation": 0,
+      "color": "#3b82f6"
+    },
+    {
+      "id": "booth-1787720910195",
+      "x": 1680,
+      "y": 1450,
+      "type": "booth",
+      "label": "",
+      "width": 30,
+      "height": 30,
+      "orientation": "single",
+      "rotation": 0,
+      "color": "#6b7280"
+    }
+  ],
+  "exportedAt": "2026-08-26T05:08:34.337Z"
+}
