@@ -1,52 +1,9 @@
 {
+  "label": "Hall B",
+  "group": "Bartle",
+  "imageWidth": 1600,
+  "imageHeight": 1200,
+  "baseImage": "/images/top_down/bartle_hall/hall-b.png",
   "room": "hall-b",
-  "imageWidth": 1349,
-  "imageHeight": 2384,  
-  "items": [
-    {
-      "id": "table-1787720841618",
-      "x": 650,
-      "y": 810,
-      "type": "table",
-      "label": "",
-      "width": 20,
-      "height": 20,
-      "orientation": "round",
-      "rotation": 0
-    },
-    {
-      "id": "chair-1787720844334",
-      "x": 285,
-      "y": 985,
-      "type": "chair",
-      "label": "",
-      "width": 5,
-      "height": 5,
-      "orientation": "horizontal",
-      "rotation": 0
-    },
-    {
-      "id": "chair-1787720846320",
-      "x": 855,
-      "y": 1220,
-      "type": "chair",
-      "label": "",
-      "width": 5,
-      "height": 5,
-      "orientation": "horizontal",
-      "rotation": 0
-    },
-    {
-      "id": "chair-1787720848346",
-      "x": 570,
-      "y": 1450,
-      "type": "chair",
-      "label": "",
-      "width": 5,
-      "height": 5,
-      "orientation": "horizontal",
-      "rotation": 0
-    }
-  ],
-  "exportedAt": "2026-08-26T05:07:30.412Z"
+  "items": []
 }
