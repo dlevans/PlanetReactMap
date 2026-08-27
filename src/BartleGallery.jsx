@@ -1,5 +1,5 @@
 import ZoomPanViewport from './ZoomPanViewport.jsx'
-import ItemPin from './ItemPin.jsx'
+import ItemPin from './Itempin.jsx'
 
 // Order matches the original left-to-right layout (E through A).
 const HALLS = ['hall-e', 'hall-d', 'hall-c', 'hall-b', 'hall-a']
