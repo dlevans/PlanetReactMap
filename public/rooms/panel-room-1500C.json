@@ -3,7 +3,7 @@
   "group": "Panel Room 1500",
   "imageWidth": 512,
   "imageHeight": 131,
-  "baseImage": "/images/top_down/room_1500/1500_04.png",
+   "baseImage": "/images/rooms-1501.png",
   "room": "panel-room-1500C",
   "items": []
 }

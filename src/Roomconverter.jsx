@@ -113,17 +113,17 @@ export const ROOM_METADATA = {
   'panel-room-1500A': {
     label: 'Room 1500A',
     group: 'Room 1500',
-    baseImage: 'images/top_down/room_1500/1500_02.png'
+    baseImage: 'images/rooms-1501.png'
   },
   'panel-room-1500B': {
     label: 'Room 1500B',
     group: 'Room 1500',
-    baseImage: 'images/top_down/room_1500/1500_03.png'
+    baseImage: 'images/rooms-1501.png'
   },
   'panel-room-1500C': {
     label: 'Room 1500C',
     group: 'Room 1500',
-    baseImage: 'images/top_down/room_1500/1500_04.png'
+    baseImage: 'images/rooms-1501.png'
   },
   'grand-ballroom': {
     label: 'Grand Ballroom (2501)',
