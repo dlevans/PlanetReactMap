@@ -1,9 +1,9 @@
 {
-  "label": "Room 1500C",
+  "label": "Room 1500B",
   "group": "Panel Room 1500",
-  "imageWidth": 1200,
-  "imageHeight": 1500,
-  "baseImage": "/images/top_down/room_1500/1500_04.png",
-  "room": "panel-room-1500C",
+  "imageWidth": 512,
+  "imageHeight": 216,
+  "baseImage": "/images/top_down/room_1500/1500_03.png",
+  "room": "panel-room-1500B",
   "items": []
 }

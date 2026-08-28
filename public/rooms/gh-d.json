@@ -1,0 +1,9 @@
+{
+  "label": "Great Hall D",
+  "group": "Great Hall",
+  "imageWidth": 307,
+  "imageHeight": 104,
+  "baseImage": "/images/top_down/great_hall/3501 - A.png",
+  "room": "gh-d",
+  "items": []
+}

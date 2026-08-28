@@ -37,6 +37,7 @@ export function convertRoomJson(roomJson, roomMetadata = {}) {
 /**
  * Room metadata configuration
  * Maps room IDs to their display info, base images, and groups
+ * IMPORTANT: Room IDs MUST match JSON filenames (e.g., 'rooms-2101' for 'rooms-2101.json')
  */
 export const ROOM_METADATA = {
   'hall-a': {
@@ -110,21 +111,41 @@ export const ROOM_METADATA = {
     baseImage: 'images/great_hall/great-hall-3501-Lobby.png'
   },
   'panel-room-1500A': {
-    label: 'Room 1500A-C',
-    group: 'Conference Center & Grand Ballroom',
-    baseImage: 'images/rooms-1501.png'
+    label: 'Room 1500A',
+    group: 'Room 1500',
+    baseImage: 'images/top_down/room_1500/1500_02.png'
   },
-  'ballroom': {
+  'panel-room-1500B': {
+    label: 'Room 1500B',
+    group: 'Room 1500',
+    baseImage: 'images/top_down/room_1500/1500_03.png'
+  },
+  'panel-room-1500C': {
+    label: 'Room 1500C',
+    group: 'Room 1500',
+    baseImage: 'images/top_down/room_1500/1500_04.png'
+  },
+  'grand-ballroom': {
     label: 'Grand Ballroom (2501)',
     group: 'Conference Center & Grand Ballroom',
     baseImage: 'images/grand-ballroom-2501.png'
   },
-  'rooms-2502': {
+  'rooms-2502-2505': {
     label: 'Rooms 2502-2505',
     group: 'Conference Center & Grand Ballroom',
     baseImage: 'images/rooms-2502-2505.png'
   },
-  'exhibition': {
+  'rooms-2101': {
+    label: 'Rooms 2101-2105',
+    group: 'Rooms 2101-2105',
+    baseImage: 'images/rooms_2101_2105/rooms_2101_2105.png'
+  },
+  'rooms-2201': {
+    label: 'Rooms 2201-2215',
+    group: 'Rooms 2201-2215',
+    baseImage: 'images/rooms_2201_2215/rooms_2201_2215.png'
+  },
+  'exhibition-hall': {
     label: 'Exhibition Hall',
     group: 'Municipal Auditorium',
     baseImage: 'images/exhibition-hall.png'
@@ -134,12 +155,12 @@ export const ROOM_METADATA = {
     group: 'Municipal Auditorium',
     baseImage: 'images/arena.png'
   },
-  'music': {
+  'music-hall': {
     label: 'Music Hall',
     group: 'Municipal Auditorium',
     baseImage: 'images/music-hall.png'
   },
-  'little': {
+  'little-theater': {
     label: 'Little Theatre',
     group: 'Municipal Auditorium',
     baseImage: 'images/little-theatre.png'

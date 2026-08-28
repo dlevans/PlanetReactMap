@@ -1,0 +1,21 @@
+{
+  "label": "Great Hall B",
+  "group": "Great Hall",
+  "imageWidth": 318,
+  "imageHeight": 104,
+  "baseImage": "/images/top_down/great_hall/great-hall.png",
+  "room": "gh-b",
+  "items": [
+    {
+      "id": "table-1787888393141",
+      "x": 65,
+      "y": 65,
+      "type": "table",
+      "label": "",
+      "width": 20,
+      "height": 20,
+      "orientation": "round",
+      "rotation": 0
+    }
+  ]
+}

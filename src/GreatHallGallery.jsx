@@ -61,24 +61,24 @@ export default function GreatHallGallery({ checked, rooms, onSelectBooth, select
 }
 
 function PuzzleImage({ src, alt, roomId, room, onSelectBooth, selectedKey }) {
-  const booths = room?.booths
+  const items = room?.items
   const imageWidth = room?.imageWidth
   const imageHeight = room?.imageHeight
-  const hasPins = Array.isArray(booths) && booths.length > 0 && imageWidth && imageHeight
+  const hasItems = Array.isArray(items) && items.length > 0 && imageWidth && imageHeight
 
   return (
     <div className="puzzle-image-wrap">
       <img className="puzzle-image" src={src} alt={alt} draggable={false} />
-      {hasPins && (
+      {hasItems && (
         <div className="pins-overlay">
-          {booths.map(b => (
+          {items.map(item => (
             <BoothPin
-              key={b.id}
-              booth={b}
-              xPct={b.x / imageWidth * 100}
-              yPct={b.y / imageHeight * 100}
-              selected={selectedKey === roomId + '::' + b.id}
-              onClick={() => onSelectBooth?.(b, roomId)}
+              key={item.id}
+              booth={item}
+              xPct={item.x / imageWidth * 100}
+              yPct={item.y / imageHeight * 100}
+              selected={selectedKey === roomId + '::' + item.id}
+              onClick={() => onSelectBooth?.(item, roomId)}
             />
           ))}
         </div>
