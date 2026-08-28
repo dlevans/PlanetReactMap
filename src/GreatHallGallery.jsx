@@ -14,8 +14,7 @@ const GH_CELLS = [
   { id: 'gh-b', src: '3501 - B.png' },
   { id: 'gh-c', src: '3501 - C.png' },
   { id: 'gh-a', src: '3501 - A.png' },
-  { id: 'gh-lobby', src: '3501 - Lobby1.png' },
-  { id: 'gh-lobby', src: '3501 - Lobby2.png' },
+  { id: 'gh-lobby', src: '3501 - Lobby.png', spanColumns: 2 },
   { id: 'gh-g', src: '3501 - G.png' },
   { id: 'gh-e', src: '3501 - E.png' },
   { id: 'gh-h', src: '3501 - H.png' },
@@ -41,7 +40,10 @@ export default function GreatHallGallery({ checked, rooms, onSelectBooth, select
               <div
                 className={'puzzle-piece' + (cell.cap ? ' gh-cap' : '')}
                 key={i}
-                style={{ visibility: visible ? 'visible' : 'hidden' }}
+                style={{ 
+                  visibility: visible ? 'visible' : 'hidden',
+                  gridColumn: cell.spanColumns ? `span ${cell.spanColumns}` : 'auto'
+                }}
               >
                 <PuzzleImage
                   src={`/images/top_down/great_hall/${cell.src}`}
