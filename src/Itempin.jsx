@@ -1,3 +1,6 @@
+import { useContext } from 'react'
+import { ZoomContext } from './ZoomPanViewport.jsx'
+
 /**
  * ItemPin Component - Fixed version
  * Renders any item type (booth, table, chair, template-image, etc.) with full styling
@@ -5,6 +8,7 @@
  */
 
 export default function ItemPin({ item, xPct, yPct, imageWidth, imageHeight, selected, onClick }) {
+  const zoom = useContext(ZoomContext) / 100
   const { type, label, width, height, rotation, color } = item;
 
   // Style based on item type
@@ -29,8 +33,8 @@ export default function ItemPin({ item, xPct, yPct, imageWidth, imageHeight, sel
           ...base,
           width: `${widthPct}%`,
           height: `${heightPct}%`,
-          backgroundColor: color || '#3b82f6',
-          border: selected ? '3px solid #1e40af' : '2px solid rgba(0,0,0,0.2)',
+          backgroundColor: selected ? '#ef4444' : (color || '#3b82f6'),
+          border: selected ? '3px solid #dc2626' : '2px solid rgba(0,0,0,0.2)',
           borderRadius: '4px',
           display: 'flex',
           alignItems: 'center',
@@ -97,7 +101,13 @@ export default function ItemPin({ item, xPct, yPct, imageWidth, imageHeight, sel
     }
   };
 
-  const showLabel = label && ['booth', 'table'].includes(type);
+  const showLabel = ['booth', 'table'].includes(type) && zoom >= 1.75;
+  const displayLabel = type === 'booth' ? item.id : label;
+
+  const textStyle = {
+    WebkitTextStroke: '1px black',
+    textShadow: '0 0 3px rgba(0,0,0,0.8)',
+  };
 
   return (
     <div
@@ -108,7 +118,7 @@ export default function ItemPin({ item, xPct, yPct, imageWidth, imageHeight, sel
       tabIndex={0}
       title={`${item.id}${label ? ' - ' + label : ''} (${type})`}
     >
-      {showLabel && <span>{label}</span>}
+      {showLabel && <span style={textStyle}>{displayLabel}</span>}
     </div>
   );
 }
