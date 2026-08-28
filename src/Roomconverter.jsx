@@ -109,8 +109,8 @@ export const ROOM_METADATA = {
     group: 'Great Hall (3501)',
     baseImage: 'images/great_hall/great-hall-3501-Lobby.png'
   },
-  'panel-room-1500': {
-    label: 'Panel Room 1500',
+  'panel-room-1500A': {
+    label: 'Room 1500A-C',
     group: 'Conference Center & Grand Ballroom',
     baseImage: 'images/rooms-1501.png'
   },

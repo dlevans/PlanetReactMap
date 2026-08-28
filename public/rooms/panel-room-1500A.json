@@ -1,4 +1,9 @@
 {
+  "label": "Room 1500A",
+  "group": "Panel Room 1500",
+  "imageWidth": 1200,
+  "imageHeight": 1500,
+  "baseImage": "/images/top_down/room_1500/1500_02.png",
   "room": "panel-room-1500A",
   "items": []
 }
