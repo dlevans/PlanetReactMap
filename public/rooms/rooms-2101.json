@@ -1,4 +1,34 @@
 {
+  "label": "Rooms 2101-2105",
+  "group": "Rooms 2101-2105",
+  "imageWidth": 2467,
+  "imageHeight": 1927,
+  "baseImage": "/images/rooms_2101_2105/rooms_2101_2105.png",
   "room": "rooms-2101",
-  "items": []
+  "items": [
+    {
+      "id": "template-round-table-10-1788152740464",
+      "x": 650,
+      "y": 445,
+      "type": "template-image",
+      "templateKey": "round-table-10",
+      "label": "Round Table + 10 Chairs",
+      "width": 35,
+      "height": 35,
+      "image": "/images/template_images/10chair1table.png",
+      "rotation": 0
+    },
+    {
+      "id": "template-round-table-10-1788152741593",
+      "x": 875,
+      "y": 450,
+      "type": "template-image",
+      "templateKey": "round-table-10",
+      "label": "Round Table + 10 Chairs",
+      "width": 35,
+      "height": 35,
+      "image": "/images/template_images/10chair1table.png",
+      "rotation": 0
+    }
+  ]
 }

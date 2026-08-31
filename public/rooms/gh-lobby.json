@@ -1,7 +1,7 @@
 {
   "label": "Great Hall Lobby",
-  "group": "Great Hall (3501)",
-  "imageWidth": 500,
+  "group": "Great Hall",
+  "imageWidth": 588,
   "imageHeight": 102,
   "baseImage": "/images/top_down/great_hall/great-hall.png",
   "room": "gh-lobby",
