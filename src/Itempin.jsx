@@ -54,11 +54,8 @@ export default function ItemPin({ item, xPct, yPct, imageWidth, imageHeight, sel
           backgroundColor: '#d4af37',
           border: selected ? '2px solid #b8941f' : '2px solid #8b7600',
           borderRadius: '2px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          fontSize: '10px',
-          color: '#333'
+          pointerEvents: 'none', // Not clickable
+          cursor: 'default'
         };
 
       case 'chair':
@@ -68,7 +65,9 @@ export default function ItemPin({ item, xPct, yPct, imageWidth, imageHeight, sel
           height: `${heightPct}%`,
           backgroundColor: '#e5e7eb',
           border: selected ? '2px solid #6b7280' : '1px solid #9ca3af',
-          borderRadius: '1px'
+          borderRadius: '1px',
+          pointerEvents: 'none', // Not clickable
+          cursor: 'default'
         };
 
       case 'template-image':
@@ -81,7 +80,27 @@ export default function ItemPin({ item, xPct, yPct, imageWidth, imageHeight, sel
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'center',
           border: selected ? '2px solid #ec4899' : '1px dashed #a78bfa',
-          borderRadius: '2px'
+          borderRadius: '2px',
+          pointerEvents: 'none', // Not clickable
+          cursor: 'default'
+        };
+
+      case 'signage':
+        return {
+          ...base,
+          width: `${widthPct}%`,
+          height: `${heightPct}%`,
+          backgroundColor: selected ? '#fbbf24' : (color || '#f59e0b'),
+          border: selected ? '3px solid #f97316' : '2px solid rgba(0,0,0,0.2)',
+          borderRadius: '4px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          color: 'white',
+          fontSize: '12px',
+          fontWeight: 'bold',
+          textShadow: '0 1px 2px rgba(0,0,0,0.5)',
+          padding: '4px'
         };
 
       default:
@@ -92,31 +111,37 @@ export default function ItemPin({ item, xPct, yPct, imageWidth, imageHeight, sel
           backgroundColor: '#9ca3af',
           border: selected ? '2px solid #374151' : '1px solid #6b7280',
           borderRadius: '2px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          fontSize: '10px',
-          color: 'white'
+          pointerEvents: 'none', // Not clickable
+          cursor: 'default'
         };
     }
   };
 
-  const showLabel = ['booth', 'table'].includes(type) && zoom >= 1.75;
-  const displayLabel = type === 'booth' ? item.id : label;
+  // Show labels for booths and signage - everything else (tables, chairs, etc) has NO labels
+  const showLabel = (type === 'booth' || type === 'signage') && zoom >= 1.75;
+  
+  // Make booths and signage clickable - everything else is non-interactive
+  const isClickable = type === 'booth' || type === 'signage';
+  
+  // Always display booth ID for booths, never show the label text on map
+  const displayLabel = item.id;
 
+  // Clean outline effect matching Map Maker's canvas rendering
   const textStyle = {
-    WebkitTextStroke: '1px black',
-    textShadow: '0 0 3px rgba(0,0,0,0.8)',
+    textShadow: '-0.5px -0.5px 0 #000, 0.5px -0.5px 0 #000, -0.5px 0.5px 0 #000, 0.5px 0.5px 0 #000, 0 0 2px rgba(0,0,0,0.6)',
+    fontWeight: 'bold',
+    fontSize: 'inherit',
+    letterSpacing: '0.5px'
   };
 
   return (
     <div
       style={getItemStyles()}
-      onClick={onClick}
-      onMouseDown={e => e.stopPropagation()} // Prevent zoom pan from interfering
-      role="button"
-      tabIndex={0}
-      title={`${item.id}${label ? ' - ' + label : ''} (${type})`}
+      onClick={isClickable ? onClick : undefined}
+      onMouseDown={isClickable ? (e => e.stopPropagation()) : undefined}
+      role={isClickable ? "button" : undefined}
+      tabIndex={isClickable ? 0 : undefined}
+      title={isClickable ? `${item.id}${label ? ' - ' + label : ''} (${type})` : undefined}
     >
       {showLabel && <span style={textStyle}>{displayLabel}</span>}
     </div>

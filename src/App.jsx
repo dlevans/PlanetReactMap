@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import BartleGallery from './BartleGallery.jsx'
 import GreatHallGallery from './GreatHallGallery.jsx'
 import Room1500Gallery from './Room1500Gallery.jsx'
-import BoothPanel from './BoothPanel.jsx'
+import BoothPopup from './BoothPopup.jsx'
 import BoothSearch from './BoothSearch.jsx'
 import GrandBallroomGallery from './GrandBallroomGallery.jsx'
 import Rooms2502_2505 from './Rooms2502_2505.jsx'
@@ -195,11 +195,12 @@ export default function App() {
           <LittleTheater checked={checked} rooms={rooms} onSelectBooth={selectBooth} selectedKey={selectedKey} />
           <MusicHall checked={checked} rooms={rooms} onSelectBooth={selectBooth} selectedKey={selectedKey} />
         </div>
-
-        {selectedBooth && (
-          <BoothPanel data={selectedBooth} onClose={() => setSelectedBooth(null)} checked={checked} rooms={rooms} onSelectBooth={selectBooth} />
-        )}
       </div>
+
+      {/* Floating Booth Info Popup */}
+      {selectedBooth && (
+        <BoothPopup data={selectedBooth} onClose={() => setSelectedBooth(null)} checked={checked} rooms={rooms} onSelectBooth={selectBooth} />
+      )}
     </div>
   )
 }
