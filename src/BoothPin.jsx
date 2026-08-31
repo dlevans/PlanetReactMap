@@ -62,6 +62,30 @@ export default function BoothPin({ booth, xPct, yPct, selected, onClick }) {
     )
   }
 
+  // Template images: render background image, not clickable, no badge
+  if (booth.type === 'template-image') {
+    return (
+      <div
+        style={{
+          position: 'absolute',
+          left: xPct + '%',
+          top: yPct + '%',
+          transform: `translate(-50%, -50%) scale(${inverseScale})`,
+          width: '40px',
+          height: '40px',
+          backgroundImage: `url('${booth.image}')`,
+          backgroundSize: 'contain',
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'center',
+          border: '1px dashed #a78bfa',
+          borderRadius: '2px',
+          pointerEvents: 'none',  // Not clickable
+          cursor: 'default',
+        }}
+      />
+    )
+  }
+
   // Other item types: don't render
   return null
 }

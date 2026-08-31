@@ -7,7 +7,7 @@
   "room": "gh-a",
   "items": [
     {
-      "id": "t1",
+      "id": "table-1787887928147",
       "x": 50,
       "y": 65,
       "type": "table",
@@ -18,7 +18,7 @@
       "rotation": 0
     },
     {
-      "id": "t2",
+      "id": "t",
       "x": 65,
       "y": 80,
       "type": "table",
@@ -26,6 +26,29 @@
       "width": 20,
       "height": 20,
       "orientation": "round",
+      "rotation": 0
+    },
+    {
+      "id": "chair-1788148187098",
+      "x": 35,
+      "y": 30,
+      "type": "chair",
+      "label": "",
+      "width": 5,
+      "height": 5,
+      "orientation": "horizontal",
+      "rotation": 0
+    },
+    {
+      "id": "template-round-table-10-1788148225747",
+      "x": 35,
+      "y": 30,
+      "type": "template-image",
+      "templateKey": "round-table-10",
+      "label": "Round Table + 10 Chairs",
+      "width": 35,
+      "height": 35,
+      "image": "/images/template_images/10chair1table.png",
       "rotation": 0
     }
   ]
