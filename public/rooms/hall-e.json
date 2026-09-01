@@ -2,7 +2,7 @@
   "label": "Hall E",
   "group": "Bartle",
   "imageWidth": 2804,
-  "imageHeight": 2379,
+  "imageHeight": 2289,
   "baseImage": "/images/top_down/bartle_hall/hall-e.png",
   "room": "hall-e",
   "items": [
