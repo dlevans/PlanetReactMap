@@ -2,9 +2,9 @@ import ZoomPanViewport from './ZoomPanViewport.jsx'
 import BoothPin from './BoothPin.jsx'
 
 // Must match the key in booths.json ("ballroom")
-const GRAND_BALLROOM_ID = 'rooms-2502-2505' //.json filename
+const GRAND_BALLROOM_ID = 'lobby-2300' //.json filename
 
-export default function Rooms2502_2505({ checked, rooms, onSelectBooth, selectedKey }) {
+export default function Lobby_2300({ checked, rooms, onSelectBooth, selectedKey }) {
   // Return null if the ballroom checkbox is not selected
   if (!checked[GRAND_BALLROOM_ID]) return null
 

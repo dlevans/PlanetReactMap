@@ -1,5 +1,10 @@
 {
-  "room": "rooms-2502-2505",
+  "label": "Rooms 2502-2505",
+  "group": "Rooms 2502-2505",
+  "imageWidth": 1983,
+  "imageHeight": 1562,
+  "baseImage": "/images/rooms_2502_2505/rooms_2502_2505.png",
+   "room": "rooms-2502-2505", 
   "items": [
     {
       "id": "template-round-table-10-1788152501340",
