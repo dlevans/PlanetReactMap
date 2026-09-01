@@ -43,127 +43,132 @@ export const ROOM_METADATA = {
   'hall-a': {
     label: 'Hall A',
     group: 'Bartle Hall',
-    baseImage: 'images/bartle_hall/hall-a.png'
+    baseImage: 'images/top_map/hall-a.png'
   },
   'hall-b': {
     label: 'Hall B',
     group: 'Bartle Hall',
-    baseImage: 'images/bartle_hall/hall-b.png'
+    baseImage: 'images/top_map/hall-b.png'
   },
   'hall-c': {
     label: 'Hall C',
     group: 'Bartle Hall',
-    baseImage: 'images/bartle_hall/hall-c.png'
+    baseImage: 'images/top_map/hall-c.png'
   },
   'hall-d': {
     label: 'Hall D',
     group: 'Bartle Hall',
-    baseImage: 'images/bartle_hall/hall-d.png'
+    baseImage: 'images/top_map/hall-d.png'
   },
   'hall-e': {
     label: 'Hall E',
     group: 'Bartle Hall',
-    baseImage: 'images/bartle_hall/hall-e.png'
+    baseImage: 'images/top_map/hall-e.png'
   },
   'gh-a': {
     label: '3501 A',
     group: 'Great Hall (3501)',
-    baseImage: 'images/great_hall/great-hall-3501-A.png'
+    baseImage: 'images/top_map/great-hall-3501-A.png'
   },
   'gh-b': {
     label: '3501 B',
     group: 'Great Hall (3501)',
-    baseImage: 'images/great_hall/great-hall-3501-B.png'
+    baseImage: 'images/top_map/great-hall-3501-B.png'
   },
   'gh-c': {
     label: '3501 C',
     group: 'Great Hall (3501)',
-    baseImage: 'images/great_hall/great-hall-3501-C.png'
+    baseImage: 'images/top_map/great-hall-3501-C.png'
   },
   'gh-d': {
     label: '3501 D',
     group: 'Great Hall (3501)',
-    baseImage: 'images/great_hall/great-hall-3501-D.png'
+    baseImage: 'images/top_map/great-hall-3501-D.png'
   },
   'gh-e': {
     label: '3501 E',
     group: 'Great Hall (3501)',
-    baseImage: 'images/great_hall/great-hall-3501-E.png'
+    baseImage: 'images/top_map/great-hall-3501-E.png'
   },
   'gh-f': {
     label: '3501 F',
     group: 'Great Hall (3501)',
-    baseImage: 'images/great_hall/great-hall-3501-F.png'
+    baseImage: 'images/top_map/great-hall-3501-F.png'
   },
   'gh-g': {
     label: '3501 G',
     group: 'Great Hall (3501)',
-    baseImage: 'images/great_hall/great-hall-3501-G.png'
+    baseImage: 'images/top_map/great-hall-3501-G.png'
   },
   'gh-h': {
     label: '3501 H',
     group: 'Great Hall (3501)',
-    baseImage: 'images/great_hall/great-hall-3501-H.png'
+    baseImage: 'images/top_map/great-hall-3501-H.png'
   },
   'gh-lobby': {
     label: 'Great Hall Lobby',
     group: 'Great Hall (3501)',
-    baseImage: 'images/great_hall/great-hall-3501-Lobby.png'
+    baseImage: 'images/top_map/great-hall-3501-Lobby.png'
   },
   'panel-room-1500A': {
     label: 'Room 1500A',
     group: 'Room 1500',
-    baseImage: 'images/rooms-1501.png'
+    baseImage: 'images/top_map/rooms-1501.png'
   },
   'panel-room-1500B': {
     label: 'Room 1500B',
     group: 'Room 1500',
-    baseImage: 'images/rooms-1501.png'
+    baseImage: 'images/top_map/rooms-1501.png'
   },
   'panel-room-1500C': {
     label: 'Room 1500C',
     group: 'Room 1500',
-    baseImage: 'images/rooms-1501.png'
+    baseImage: 'images/top_map/rooms-1501.png'
   },
   'grand-ballroom': {
     label: 'Grand Ballroom (2501)',
     group: 'Conference Center & Grand Ballroom',
-    baseImage: 'images/grand-ballroom-2501.png'
+    baseImage: 'images/top_map/grand-ballroom-2501.png'
   },
   'rooms-2502-2505': {
     label: 'Rooms 2502-2505',
     group: 'Conference Center & Grand Ballroom',
-    baseImage: 'images/rooms-2502-2505.png'
+    baseImage: 'images/top_map/rooms-2502-2505.png'
   },
   'rooms-2101': {
     label: 'Rooms 2101-2105',
     group: 'Rooms 2101-2105',
-    baseImage: 'images/rooms_2101_2105/rooms_2101_2105.png'
+    baseImage: 'images/top_map/rooms_2101_2105.png'
+  },
+  'lobby-2300': {
+    label: 'Lobby 2300',
+    group: 'Lobby 2300',
+    baseImage: 'images/top_map/lobby-2300.png'
   },
   'rooms-2201': {
     label: 'Rooms 2201-2215',
     group: 'Rooms 2201-2215',
-    baseImage: 'images/rooms_2201_2215/rooms_2201_2215.png'
+    baseImage: 'images/top_map/rooms_2201_2215.png'
   },
   'exhibition-hall': {
     label: 'Exhibition Hall',
     group: 'Municipal Auditorium',
-    baseImage: 'images/exhibition-hall.png'
+    baseImage: 'images/top_map/exhibition-hall.png'
   },
   'arena': {
     label: 'Arena',
     group: 'Municipal Auditorium',
-    baseImage: 'images/arena.png'
+    baseImage: 'images/top_map/arena.png'
   },
   'music-hall': {
     label: 'Music Hall',
     group: 'Municipal Auditorium',
-    baseImage: 'images/music-hall.png'
+    baseImage: 'images/top_map/music-hall.png'
   },
   'little-theater': {
     label: 'Little Theatre',
     group: 'Municipal Auditorium',
-    baseImage: 'images/little-theatre.png'
+    baseImage: 'images/top_map/little-theatre.png'
   }
 };
 

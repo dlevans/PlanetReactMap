@@ -2,7 +2,7 @@ import ZoomPanViewport from './ZoomPanViewport.jsx'
 import BoothPin from './BoothPin.jsx'
 
 // Must match the key in booths.json ("ballroom")
-const GRAND_BALLROOM_ID = 'ballroom' 
+const GRAND_BALLROOM_ID = 'grand-ballroom'  //.json filename
 
 export default function GrandBallroomGallery({ checked, rooms, onSelectBooth, selectedKey }) {
   // Return null if the ballroom checkbox is not selected
@@ -15,7 +15,7 @@ export default function GrandBallroomGallery({ checked, rooms, onSelectBooth, se
       <ZoomPanViewport>
         <div className="hall-image-wrap">
           <PuzzleImage
-            src="/images/grand_ballroom/grand_ballroom.jpg"
+            src="/images/top_down/grand_ballroom/grand_ballroom.png"
             alt="Grand Ballroom"
             room={room}
             onSelectBooth={onSelectBooth}

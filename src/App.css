@@ -386,3 +386,58 @@ label input[type="checkbox"] { display: none; }
 .booth-list-details { flex: 1; min-width: 0; }
 .booth-list-label { font-size: 13px; color: #e8e9eb; font-weight: 500; margin-bottom: 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .booth-list-room { font-size: 11px; color: #9aa0a8; }
+
+
+/* Styles for the group header with toggle button */
+.group-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.group-header p {
+  margin: 0;
+  flex: 1;
+}
+
+.group-toggle-btn {
+  padding: 4px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  background-color: #4a4a4a;
+  color: #fff;
+  border: 1px solid #666;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.group-toggle-btn:hover {
+  background-color: #5a5a5a;
+  border-color: #888;
+}
+
+.group-toggle-btn:active {
+  background-color: #3a3a3a;
+  transform: scale(0.98);
+}
+
+/* Optional: Different colors based on button text */
+.group-toggle-btn:hover::before {
+  content: '';
+}
+
+/* Ensure group has proper spacing */
+.group {
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #555;
+}
+
+.group:last-child {
+  border-bottom: none;
+}

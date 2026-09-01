@@ -99,6 +99,19 @@ export default function App() {
     setChecked(prev => ({ ...prev, [id]: !prev[id] }))
   }
 
+  function toggleGroup(group) {
+    setChecked(prev => {
+      const newChecked = { ...prev }
+      // Check if all rooms in this group are currently selected
+      const allSelected = group.rooms.every(([id]) => newChecked[id])
+      // If all selected, deselect all; otherwise select all
+      group.rooms.forEach(([id]) => {
+        newChecked[id] = !allSelected
+      })
+      return newChecked
+    })
+  }
+
   function clearMap() {
     setChecked({})
     setSelectedBooth(null)
@@ -146,21 +159,37 @@ export default function App() {
         )}
         {!rooms && !error && <p className="loading-msg">Loading rooms…</p>}
 
-        {groups.map(group => (
-          <div className="group" key={group.name}>
-            <p><strong>{group.name}</strong></p>
-            {group.rooms.map(([id, room]) => (
-              <label key={id} className={checked[id] ? 'active' : ''}>
-                <input
-                  type="checkbox"
-                  checked={!!checked[id]}
-                  onChange={() => toggleRoom(id)}
-                />
-                {room.label}
-              </label>
-            ))}
-          </div>
-        ))}
+        {groups.map(group => {
+          // Determine group state
+          const allSelected = group.rooms.every(([id]) => checked[id])
+          const someSelected = group.rooms.some(([id]) => checked[id])
+          
+          return (
+            <div className="group" key={group.name}>
+              <div className="group-header">
+                <p><strong>{group.name}</strong></p>
+                <button
+                  type="button"
+                  className="group-toggle-btn"
+                  onClick={() => toggleGroup(group)}
+                  title={allSelected ? 'Deselect all' : 'Select all'}
+                >
+                  {allSelected ? '✓ All' : someSelected ? '− Some' : '+ None'}
+                </button>
+              </div>
+              {group.rooms.map(([id, room]) => (
+                <label key={id} className={checked[id] ? 'active' : ''}>
+                  <input
+                    type="checkbox"
+                    checked={!!checked[id]}
+                    onChange={() => toggleRoom(id)}
+                  />
+                  {room.label}
+                </label>
+              ))}
+            </div>
+          )
+        })}
       </div>
 
       <div className="sidebar-inner">
